@@ -1,6 +1,7 @@
 # Dotfiles
 
-My Dotfiles for Vim, Tmux and Zsh
+My Dotfiles for Vim, Tmux and Zsh<br>
+Method used to create this repo: [Link](https://news.ycombinator.com/item?id=11070797)
 
 ### Screenshot:
 ![Screenshot](/Pictures/full-setup.png?raw=true)
