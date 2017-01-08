@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="color" mtime="1471876790" type="string">
+		<stringvalue>#da58d9ebe824</stringvalue>
+	</entry>
+	<entry name="style" mtime="1483719061" type="string">
+		<stringvalue>Roboto Mono for Powerline 10</stringvalue>
+	</entry>
+	<entry name="palette_name" mtime="1483833239" type="string">
+		<stringvalue>Custom</stringvalue>
+	</entry>
+	<entry name="palette" mtime="1483833239" type="string">
+		<stringvalue>#000000000000:#afaf4b4b5757:#8787b2b27979:#e5e5c0c07878:#7c7c8f8fa3a3:#a3a379799696:#eded79794c4c:#b2b2b8b8c2c2:#4c634c634c63:#afaf4b4b5757:#8787b2b27979:#e5e5c0c07878:#7298b77bffff:#ffffafa25f5f:#5f5f5f5fffff:#b2b2b8b8c2c2:#b2b2b8b8c2c2:#1c1c1c1c1c1c</stringvalue>
+	</entry>
+	<entry name="allow_bold" mtime="1483906765" type="bool" value="true"/>
+</gconf>
