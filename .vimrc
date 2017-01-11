@@ -18,6 +18,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'notpratheek/vim-luna'
+Plugin 'python-mode/python-mode'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " -----------------------------------------------
@@ -53,6 +54,7 @@ set history=50		" keep 50 lines of command line history
 set incsearch		" do incremental searching
 set noshowmode
 set nonu
+set clipboard=unnamed
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
@@ -60,6 +62,7 @@ map Q gq
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 " ------------------------------------------------
+
 
 " Colorscheme ------------------------------------
 " Enable 256 color schemes
@@ -114,6 +117,10 @@ highlight GitGutterChangeDelete ctermfg=yellow ctermbg=233
 let g:gitgutter_sign_column_always=1
 " -------------------------------------------------
 
+" add colorcolumn at 80 chars for python PEP8 ----
+set cc=80
+hi ColorColumn ctermbg=233
+" ------------------------------------------------
 
 
 " Add optional packages.
