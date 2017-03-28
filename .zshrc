@@ -6,6 +6,8 @@ export ZSH=/home/arsh/.oh-my-zsh
 #ZSH_THEME="customtheme"
 ZSH_THEME='spaceship'
 SPACESHIP_PROMPT_TRUNC=0
+SPACESHIP_PYENV_SYMBOL='\b \b'
+SPACESHIP_PYENV_SHOW=true
 
 # Set default user
 DEFAULT_USER=arsh
@@ -34,6 +36,11 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 #  Zsh gives a sanity check for 'rm *'
 setopt RM_STAR_WAIT
+
+# path for pyenv
+export PATH="/home/arsh/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 source $ZSH/oh-my-zsh.sh
 #------------------------ other commented settings --------------------------------------------------------------------
