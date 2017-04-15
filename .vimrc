@@ -63,6 +63,10 @@ set noshowmode         " hide default status line
 set nonu               " hide linenumber column
 " set cpoptions+=$       " add $ at end of c command
 " set clipboard=unnamed
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+ 
 " ------------------------------------------------
 
 " Python related settings ------------------------
