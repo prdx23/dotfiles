@@ -58,6 +58,7 @@ endif
 set history=50		   " keep 50 lines of command line history
 set incsearch	   	   " do incremental searching
 set scrolloff=4        " 4 lines buffer for scroll
+set hidden             " allow buffers to be open in background
 filetype plugin on     " update for nerdcommenter plugin
 set noshowmode         " hide default status line
 set nonu               " hide linenumber column
@@ -81,6 +82,7 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
+set expandtab
 " highlight extra whitespaces
 " highlight ExtraWhitespace ctermbg=darkgreen
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match ExtraWhitespace /\s\+$/
@@ -91,7 +93,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_python_checkers = ['pep8', 'flake8']
+" let g:syntastic_python_checkers = ['pep8', 'flake8']
+let g:syntastic_python_checkers = ['pep8']
 
 " ------------------------------------------------
 
@@ -122,6 +125,8 @@ imap <right> <nop>
 vnoremap <s-tab> <gv
 vnoremap <tab> >gv
 
+" save current file by <leader>s
+noremap <Leader>s :update<CR>
 
 " Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
 "nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
