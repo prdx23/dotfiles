@@ -62,6 +62,7 @@ set hidden             " allow buffers to be open in background
 filetype plugin on     " update for nerdcommenter plugin
 set noshowmode         " hide default status line
 set nonu               " hide linenumber column
+set encoding=utf8
 " set cpoptions+=$       " add $ at end of c command
 " set clipboard=unnamed
 set tabstop=4
