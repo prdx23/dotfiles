@@ -129,6 +129,9 @@ vnoremap <tab> >gv
 " save current file by <leader>s
 noremap <Leader>s :update<CR>
 
+" map semicolon to colon
+nmap ; :
+
 " Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
 "nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 "nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>

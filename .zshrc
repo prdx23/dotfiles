@@ -27,12 +27,17 @@ alias tdev='sh ~/utilities/tmux-setup.sh'
 # AWS SSH Aliases
 export AWS='ec2-54-214-216-59.us-west-2.compute.amazonaws.com'
 alias aws='ssh -R 52698:localhost:23698 paradox@$AWS'
+
 export AWSL='ec2-54-159-68-183.compute-1.amazonaws.com'
 alias aws-lyntcube='ssh -R 52698:localhost:52698 lyntcube@$AWSL'
+
+export AWS_MARTY='ec2-52-52-84-61.us-west-1.compute.amazonaws.com'
+alias aws-marty='ssh marty@$AWS_MARTY'
 
 # Path exports
 export PATH="/home/arsh/Softwares/node-v4.4.3-linux-x64/bin":$PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+export PATH="/home/arsh/miniconda3/bin":$PATH
 
 #  Zsh gives a sanity check for 'rm *'
 setopt RM_STAR_WAIT
@@ -43,6 +48,7 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 source $ZSH/oh-my-zsh.sh
+source ~/utilities/commands.sh
 #------------------------ other commented settings --------------------------------------------------------------------
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
