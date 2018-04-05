@@ -34,10 +34,14 @@ alias aws-lyntcube='ssh -R 52698:localhost:52698 lyntcube@$AWSL'
 export AWS_MARTY='ec2-52-52-84-61.us-west-1.compute.amazonaws.com'
 alias aws-marty='ssh marty@$AWS_MARTY'
 
+export AWS_LYNT='ec2-35-168-121-215.compute-1.amazonaws.com'
+alias aws-lynt='ssh lyntcube@$AWS_LYNT'
+
 # Path exports
 export PATH="/home/arsh/Softwares/node-v4.4.3-linux-x64/bin":$PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 export PATH="/home/arsh/miniconda3/bin":$PATH
+export PATH="/home/arsh/.local/bin:"$PATH
 
 #  Zsh gives a sanity check for 'rm *'
 setopt RM_STAR_WAIT

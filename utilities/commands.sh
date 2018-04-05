@@ -14,7 +14,7 @@ v() {
 	tmux select-pane -t 1
 	if [ "$2" = "-d" ]
 	then
-		vpwd
+		vcd
 	fi
 }
 
@@ -25,7 +25,7 @@ vt() {
 	tmux select-pane -t 1
 	if [ "$2" = "-d" ]
 	then
-		vpwd
+		vcd
 	fi
 }
 
@@ -40,3 +40,14 @@ sd() { tmux split-window -c "#{pane_current_path}" }
 
 # split current pane horizantly with pwd
 sr() { tmux split-window -h -c "#{pane_current_path}" }
+
+# watch for changes in given file and excecute given command
+# run [-c] [file/regex] [command]
+run() { 
+	if [ "$1" = "-c" ]
+    then
+        shift && find . -name "$1" | entr -c "${@:2}"
+    else
+        find . -name "$1" | entr "${@:2}"
+    fi
+}

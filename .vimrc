@@ -20,8 +20,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'notpratheek/vim-luna'
 
 " Python related plugins
-Plugin 'vim-scripts/indentpython.vim'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'tweekmonster/braceless.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'jmcantrell/vim-virtualenv'
 "Plugin 'python-mode/python-mode'
@@ -67,23 +67,28 @@ set encoding=utf8
 " set clipboard=unnamed
 set tabstop=4
 set softtabstop=4
+set expandtab
 set shiftwidth=4
  
 " ------------------------------------------------
 
 " Python related settings ------------------------
-let python_highlight_all = 1
-" set tab to 4 
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
 
-set expandtab
+" braceless settings
+autocmd FileType python BracelessEnable +indent
+
+" let python_highlight_all = 1
+" set tab to 4 
+" au BufNewFile,BufRead *.py
+"     \ set tabstop=4 |
+"     \ set softtabstop=4 |
+"     \ set shiftwidth=4 |
+"     \ set expandtab |
+"     \ set textwidth=79 |
+"     \ set autoindent |
+"     \ set fileformat=unix
+"
+" set expandtab
 " highlight extra whitespaces
 " highlight ExtraWhitespace ctermbg=darkgreen
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match ExtraWhitespace /\s\+$/
@@ -108,9 +113,7 @@ let g:airline_theme='customtheme'
 " ------------------------------------------------
 
 " Keymappings ------------------------------------
-let mapleader = ","    " set <leader> to ,
-
-" Disable Arrow keys in Escape mode
+" Disable Arrow keys in Normal mode
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
@@ -122,21 +125,30 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
-" shortcut for multiple indents on same visual group
-vnoremap <s-tab> <gv
+" tab and shift-tab to do multiple indents for single line
 vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
-" save current file by <leader>s
-noremap <Leader>s :update<CR>
+" tab and shift-tab to do multiple indents for visual groups
+nnoremap <tab> >>
+nnoremap <s-tab> <<
 
-" map semicolon to colon
-nmap ; :
+" save current file by double spacebar
+nnoremap <space><space> :w<cr>
 
-" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
-"nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-"nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-"nnoremap <CR> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-"nnoremap <C-CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+" map enter to cmd mode
+nnoremap <cr> :
+vnoremap <cr> :
+
+" map spacebar to leader
+map <space> <leader>
+
+" map hh to temporarly turn of highlighting until next search
+nnoremap <leader>hh :noh<cr>
+
+" use ? to toggle comments in single line and visual groups
+nnoremap <silent> ? :call NERDComment(0,"toggle")<CR>
+vnoremap <silent> ? :call NERDComment(0,"toggle")<CR>gv
 " ------------------------------------------------
 
 " vim-airline statusline--------------------------
@@ -149,8 +161,8 @@ let g:airline#extensions#default#section_truncate_width = {'y':0,'a':0}
 function! AirlineInit()
   let g:airline_section_a = airline#section#create(['mode'])
   let g:airline_section_b = airline#section#create(['branch'])
-  let g:airline_section_c = airline#section#create(['%t%r'])
-  let g:airline_section_x = airline#section#create(['%Y'])
+  let g:airline_section_c = airline#section#create(['%f%r%h%'])
+  let g:airline_section_x = airline#section#create(['%Y B:%n'])
   let g:airline_section_y = airline#section#create(['%m'])
   let g:airline_section_z = airline#section#create(['%03l:%03c[%p%%]'])
 endfunction
@@ -195,3 +207,4 @@ hi ColorColumn ctermbg=233
 " The matchit plugin makes the % command work better, but it is not backwards
 " compatible.
 packadd matchit
+set showcmd
