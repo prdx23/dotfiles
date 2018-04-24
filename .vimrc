@@ -26,6 +26,9 @@ Plugin 'nvie/vim-flake8'
 Plugin 'jmcantrell/vim-virtualenv'
 "Plugin 'python-mode/python-mode'
 
+" Lisp/Scheme related
+Plugin 'kien/rainbow_parentheses.vim'
+
 call vundle#end()  
 filetype plugin indent on 
 " -----------------------------------------------------------------------------
@@ -101,6 +104,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_aggregate_errors = 1
 " let g:syntastic_python_checkers = ['pep8', 'flake8']
 let g:syntastic_python_checkers = ['pep8']
+" let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_quiet_messages = {'regex': 'E731'}
+let g:syntastic_python_checker_args='--ignore=E731'
 
 " ------------------------------------------------
 
