@@ -59,21 +59,29 @@ sr() {
 # run test.py -c python test.py
 # run test.scm racket test.scm
 # run test.py python -m doctest test.py
-# run test.html -c ~/utilities/commands.sh ref Chrome
+# run test.html -c ~/utilities/commands.sh singlemonitor Chrome
+# run test.html -c ~/utilities/commands.sh multimonitor Firefox
 run() { 
     find . -name "$1" | entr "${@:2}"
 }
 
-# minimize guake and refresh the active tab on chrome
-ref() {
+# minimize guake and refresh the active tab on browser
+singlemonitor() {
     xdotool key 'shift+BackSpace'
     xdotool windowactivate $(xdotool search --onlyvisible --class $1|head -1)
     xdotool key 'ctrl+r'
 }
 
+# switch to browser on other monitor, refresh, and switch back
+multimonitor() {
+    xdotool windowactivate $(xdotool search --onlyvisible --desktop=0 --class $1|head -1)
+    xdotool key 'ctrl+r'
+    xdotool windowactivate $(xdotool search --onlyvisible --class Guake|head -1)
+}
+
 # excecute any function in this file using the cmd:
 # ./commands.sh [function name] [function params]
-# Ex: ./commands.sh ref Chrome
+# Ex: ./commands.sh singlemonitor Chrome
 if [ "$1" != "" ]
 then
     "$1" "${@:2}"

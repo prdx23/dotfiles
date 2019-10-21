@@ -6,11 +6,21 @@ export ZSH=/home/arsh/.oh-my-zsh
 #ZSH_THEME="customtheme"
 ZSH_THEME='spaceship'
 SPACESHIP_PROMPT_TRUNC=0
+SPACESHIP_DIR_TRUNC=0
 SPACESHIP_PYENV_SYMBOL='\b \b'
 SPACESHIP_PYENV_SHOW=true
+SPACESHIP_NODE_SHOW=false
+
+# set python3 as default python
+# alias python=python3
+# alias pip=pip3
 
 # Set default user
 DEFAULT_USER=arsh
+
+# set terminal to UTF-8
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 # To support 256 color schemes
 export TERM="xterm-256color"
@@ -47,9 +57,9 @@ export PATH="/home/arsh/.local/bin:"$PATH
 setopt RM_STAR_WAIT
 
 # path for pyenv
-export PATH="/home/arsh/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# export PATH="/home/arsh/.pyenv/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 source $ZSH/oh-my-zsh.sh
 source ~/utilities/commands.sh

@@ -26,8 +26,15 @@ Plugin 'nvie/vim-flake8'
 Plugin 'jmcantrell/vim-virtualenv'
 "Plugin 'python-mode/python-mode'
 
+" Javascript related
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 " Lisp/Scheme related
-Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'kien/rainbow_parentheses.vim'
+
+" vue syntax
+Plugin 'posva/vim-vue'
 
 call vundle#end()  
 filetype plugin indent on 
@@ -62,17 +69,18 @@ set history=50		   " keep 50 lines of command line history
 set incsearch	   	   " do incremental searching
 set scrolloff=4        " 4 lines buffer for scroll
 set hidden             " allow buffers to be open in background
-filetype plugin on     " update for nerdcommenter plugin
 set noshowmode         " hide default status line
 set nonu               " hide linenumber column
 set encoding=utf8
+set showcmd
 " set cpoptions+=$       " add $ at end of c command
 " set clipboard=unnamed
 set tabstop=4
 set softtabstop=4
 set expandtab
 set shiftwidth=4
- 
+filetype plugin on     " update for nerdcommenter plugin
+packadd matchit        " Add optional packages.
 " ------------------------------------------------
 
 " Python related settings ------------------------
@@ -98,67 +106,31 @@ autocmd FileType python BracelessEnable +indent
 " au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 " au InsertLeave * match ExtraWhitespace /\s\+$/
 
+" vue synatax
+let g:vue_disable_pre_processors=1
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_aggregate_errors = 1
 " let g:syntastic_python_checkers = ['pep8', 'flake8']
-let g:syntastic_python_checkers = ['pep8']
-" let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_quiet_messages = {'regex': 'E731'}
-let g:syntastic_python_checker_args='--ignore=E731'
-
+" let g:syntastic_python_checkers = ['pep8']
+let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_quiet_messages = {'regex': '(E731|E402)'}
+let g:syntastic_python_flake8_post_args='--ignore=E731,E402'
 " ------------------------------------------------
 
 " Colorscheme ------------------------------------
-" Enable 256 color schemes
-set term=screen-256color
+set term=screen-256color " Enable 256 color schemes
 set t_Co=256
 colorscheme luna-term
-let g:airline_theme='customtheme'
-" ------------------------------------------------
-
-" Keymappings ------------------------------------
-" Disable Arrow keys in Normal mode
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
-" Disable Arrow keys in Insert mode
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
-
-" tab and shift-tab to do multiple indents for single line
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
-
-" tab and shift-tab to do multiple indents for visual groups
-nnoremap <tab> >>
-nnoremap <s-tab> <<
-
-" save current file by double spacebar
-nnoremap <space><space> :w<cr>
-
-" map enter to cmd mode
-nnoremap <cr> :
-vnoremap <cr> :
-
-" map spacebar to leader
-map <space> <leader>
-
-" map hh to temporarly turn of highlighting until next search
-nnoremap <leader>hh :noh<cr>
-
-" use ? to toggle comments in single line and visual groups
-nnoremap <silent> ? :call NERDComment(0,"toggle")<CR>
-vnoremap <silent> ? :call NERDComment(0,"toggle")<CR>gv
+highlight normal ctermbg=none
+highlight NonText ctermbg=none
 " ------------------------------------------------
 
 " vim-airline statusline--------------------------
 set laststatus=2
+let g:airline_theme='customtheme'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 0
 set timeoutlen=1000 ttimeoutlen=0
@@ -178,12 +150,18 @@ autocmd User AirlineAfterInit call AirlineInit()
 " git-gutter settings -----------------------------
 "highlight clear SignColumn
 let g:gitgutter_override_sign_column_highlight = 0
+" highlight SignColumn ctermbg=none
+" highlight GitGutterAdd ctermfg=green ctermbg=none
+" highlight GitGutterChange ctermfg=yellow ctermbg=none
+" highlight GitGutterDelete ctermfg=red ctermbg=none
+" highlight GitGutterChangeDelete ctermfg=yellow ctermbg=none
 highlight SignColumn ctermbg=233
 highlight GitGutterAdd ctermfg=green ctermbg=233
 highlight GitGutterChange ctermfg=yellow ctermbg=233
 highlight GitGutterDelete ctermfg=red ctermbg=233
 highlight GitGutterChangeDelete ctermfg=yellow ctermbg=233
-let g:gitgutter_sign_column_always=1
+" let g:gitgutter_sign_column_always=1
+set signcolumn=yes
 set updatetime=250
 " -------------------------------------------------
 
@@ -208,9 +186,71 @@ hi ColorColumn ctermbg=233
 " ------------------------------------------------
 
 
-" Add optional packages.
-"
-" The matchit plugin makes the % command work better, but it is not backwards
-" compatible.
-packadd matchit
-set showcmd
+" Keymappings ------------------------------------
+" Disable Arrow keys in Normal mode
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" Disable Arrow keys in Insert mode
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
+" tab and shift-tab to do multiple indents for visual groups
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
+
+" tab and shift-tab to do multiple indents for single line
+nnoremap <tab> >>
+nnoremap <s-tab> <<
+
+" save current file by double spacebar
+nnoremap <space><space> :w<cr>
+
+" map enter to cmd mode
+nnoremap <cr> :
+vnoremap <cr> :
+
+" map spacebar to leader
+map <space> <leader>
+
+" map leader+hh to temporarly turn of highlighting until next search
+nnoremap <leader>hh :noh<cr>
+
+" use ? to toggle comments in single line and visual groups
+nnoremap <silent> ? :call NERDComment(0,"toggle")<CR>
+vnoremap <silent> ? :call NERDComment(0,"toggle")<CR>gv
+
+" map ;; to find <++>, remove it and start insert mod
+" inoremap <leader>f<space> <Esc>/<++><Enter>"_c4l
+nnoremap <leader>f<space> <Esc>/<++><Enter>"_c4l
+nnoremap ;; <Esc>/<++><Enter>"_c4l
+inoremap ;; <Esc>/<++><Enter>"_c4l
+
+" map ;p to print()
+autocmd FileType python inoremap ;p print()<Enter><++><Esc>k0f(a
+autocmd FileType python nnoremap ;p iprint()<Enter><++><Esc>k0f(a
+
+" map ;d to def
+autocmd FileType python inoremap ;d def (<++>):<Enter><++><Esc>k0f(i
+autocmd FileType python nnoremap ;d idef (<++>):<Enter><++><Esc>k0f(i
+
+" map ;c to class
+autocmd FileType python inoremap ;c class (<++>):<Enter><Enter>def __init__(<++>):<Enter><++><Esc>kkk0f(i
+autocmd FileType python nnoremap ;c iclass (<++>):<Enter><Enter>def __init__(<++>):<Enter><++><Esc>kkk0f(i
+
+" map ;d to <div>
+autocmd FileType html inoremap ;d <div class=''><Enter><++><Enter></div><Esc>kk0f'a
+autocmd FileType html nnoremap ;d i<div class=''><Enter><++><Enter></div><Esc>kk0f'a
+
+" map ;p to <p>
+autocmd FileType html inoremap ;p <p class=''><Enter><++><Enter></p><Esc>kk0f'a
+autocmd FileType html nnoremap ;p i<p class=''><Enter><++><Enter></p><Esc>kk0f'a
+
+" map ;f to function
+autocmd FileType javascript inoremap ;f function (<++>) {<Enter><++><Enter>}<Esc>kkof(i
+autocmd FileType javascript nnoremap ;f ifunction (<++>) {<Enter><++><Enter>}<Esc>kkof(i
+" ------------------------------------------------
