@@ -1,10 +1,10 @@
 #!/bin/bash
 
-BOLT='⚡'
+BOLT=''
 CROSS='✖'
 
-charge=$(cat /sys/class/power_supply/BAT1/capacity)
-is_charging=$(cat /sys/class/power_supply/BAT1/status)
+charge=$(cat /sys/class/power_supply/BAT0/capacity)
+is_charging=$(cat /sys/class/power_supply/BAT0/status)
 
 color=''
 if [ $charge -gt 70 ]; then

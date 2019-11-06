@@ -1,4 +1,5 @@
-" Use Vim settings, rather than Vi settings (much better!).
+"
+"
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 filetype off
@@ -11,7 +12,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
+Plugin 'dense-analysis/ale'
 
 " Themes and colorschemes
 Plugin 'flazz/vim-colorschemes'
@@ -22,19 +24,17 @@ Plugin 'notpratheek/vim-luna'
 " Python related plugins
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'tweekmonster/braceless.vim'
-Plugin 'nvie/vim-flake8'
+" Plugin 'nvie/vim-flake8'
 Plugin 'jmcantrell/vim-virtualenv'
 "Plugin 'python-mode/python-mode'
 
 " Javascript related
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'posva/vim-vue'
 
 " Lisp/Scheme related
 " Plugin 'kien/rainbow_parentheses.vim'
-
-" vue syntax
-Plugin 'posva/vim-vue'
 
 call vundle#end()  
 filetype plugin indent on 
@@ -65,8 +65,12 @@ endif
 " ------------------------------------------------
 
 " General settings -------------------------------
-set history=50		   " keep 50 lines of command line history
+set history=200		   " keep 200 lines of command line history
+
 set incsearch	   	   " do incremental searching
+set ignorecase
+set smartcase
+
 set scrolloff=4        " 4 lines buffer for scroll
 set hidden             " allow buffers to be open in background
 set noshowmode         " hide default status line
@@ -79,8 +83,22 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 set shiftwidth=4
+" set expandtab
 filetype plugin on     " update for nerdcommenter plugin
 packadd matchit        " Add optional packages.
+
+set completeopt=menuone,noinsert,noselect
+set list listchars=trail:·,nbsp:·,tab:\ \ 
+
+set signcolumn=yes     " enable sign col to be always enabled
+set updatetime=250
+
+set backupdir^=$HOME/.vim/backup//
+set directory^=$HOME/.vim/swap//
+set undodir^=$HOME/.vim/undo//
+
+" auto source .vimrc on saving this file
+" autocmd! bufwritepost .vimrc source %
 " ------------------------------------------------
 
 " Python related settings ------------------------
@@ -88,37 +106,11 @@ packadd matchit        " Add optional packages.
 " braceless settings
 autocmd FileType python BracelessEnable +indent
 
-" let python_highlight_all = 1
-" set tab to 4 
-" au BufNewFile,BufRead *.py
-"     \ set tabstop=4 |
-"     \ set softtabstop=4 |
-"     \ set shiftwidth=4 |
-"     \ set expandtab |
-"     \ set textwidth=79 |
-"     \ set autoindent |
-"     \ set fileformat=unix
-"
-" set expandtab
-" highlight extra whitespaces
-" highlight ExtraWhitespace ctermbg=darkgreen
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match ExtraWhitespace /\s\+$/
-" au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-" au InsertLeave * match ExtraWhitespace /\s\+$/
+" ------------------------------------------------
 
 " vue synatax
 let g:vue_disable_pre_processors=1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_aggregate_errors = 1
-" let g:syntastic_python_checkers = ['pep8', 'flake8']
-" let g:syntastic_python_checkers = ['pep8']
-let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_quiet_messages = {'regex': '(E731|E402)'}
-let g:syntastic_python_flake8_post_args='--ignore=E731,E402'
-" ------------------------------------------------
 
 " Colorscheme ------------------------------------
 set term=screen-256color " Enable 256 color schemes
@@ -126,21 +118,83 @@ set t_Co=256
 colorscheme luna-term
 highlight normal ctermbg=none
 highlight NonText ctermbg=none
+highlight todo ctermbg=233 ctermfg=208
+" ------------------------------------------------
+
+
+" add colorcolumn at 80 chars for python PEP8 ----
+setlocal textwidth=80
+set cc=80
+hi ColorColumn ctermbg=233
+" ------------------------------------------------
+
+
+" syntastic settings -----------------------------
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_aggregate_errors = 1
+" let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_flake8_post_args='--ignore=E731,E402'
+" let g:airline#extensions#syntastic#enabled = 0
+
+" ------------------------------------------------
+
+" ALE settings -----------------------------------
+
+" open loc list on finding error
+" let g:ale_open_list = 1
+
+" loc list length
+let g:ale_list_window_size = 5
+
+" dont run linters while typing text
+" let g:ale_lint_on_text_changed = 'never'
+
+" dont run linters when opening the file
+" let g:ale_lint_on_enter = 0
+
+" dont run linters when leaving insert mode
+" let g:ale_lint_on_insert_leave = 0
+
+" dont run linters on file save
+" let g:ale_lint_on_save = 0
+
+" error msg format
+let g:ale_echo_msg_format = '[%severity%] %code%: %s'
+highlight ALEError ctermbg=red ctermfg=black
+highlight ALEErrorSign ctermbg=red ctermfg=black
+" highlight ALEErrorLine ctermbg=238
+highlight ALEWarning ctermbg=208 ctermfg=black
+highlight ALEWarningSign ctermbg=208 ctermfg=black
+" highlight ALEWarningLine ctermbg=238
+
+" dont display errors on statusline
+let g:airline#extensions#ale#enabled = 0
+
 " ------------------------------------------------
 
 " vim-airline statusline--------------------------
 set laststatus=2
 let g:airline_theme='customtheme'
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#syntastic#enabled = 0
+" let g:airline_left_sep = ' '
+" let g:airline_left_alt_sep = '|'
+" let g:airline_right_sep = ' '
+" let g:airline_right_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 set timeoutlen=1000 ttimeoutlen=0
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#virtualenv#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#default#section_truncate_width = {'y':0,'a':0}
 function! AirlineInit()
   let g:airline_section_a = airline#section#create(['mode'])
   let g:airline_section_b = airline#section#create(['branch'])
-  let g:airline_section_c = airline#section#create(['%f%r%h%'])
-  let g:airline_section_x = airline#section#create(['%Y B:%n'])
+  let g:airline_section_c = airline#section#create(['%f%r%h%w'])
+  let g:airline_section_x = airline#section#create(['%Y | B:%n'])
   let g:airline_section_y = airline#section#create(['%m'])
   let g:airline_section_z = airline#section#create(['%03l:%03c[%p%%]'])
 endfunction
@@ -148,21 +202,14 @@ autocmd User AirlineAfterInit call AirlineInit()
 " -------------------------------------------------
 
 " git-gutter settings -----------------------------
-"highlight clear SignColumn
 let g:gitgutter_override_sign_column_highlight = 0
-" highlight SignColumn ctermbg=none
-" highlight GitGutterAdd ctermfg=green ctermbg=none
-" highlight GitGutterChange ctermfg=yellow ctermbg=none
-" highlight GitGutterDelete ctermfg=red ctermbg=none
-" highlight GitGutterChangeDelete ctermfg=yellow ctermbg=none
+"highlight clear SignColumn
 highlight SignColumn ctermbg=233
 highlight GitGutterAdd ctermfg=green ctermbg=233
 highlight GitGutterChange ctermfg=yellow ctermbg=233
 highlight GitGutterDelete ctermfg=red ctermbg=233
 highlight GitGutterChangeDelete ctermfg=yellow ctermbg=233
-" let g:gitgutter_sign_column_always=1
-set signcolumn=yes
-set updatetime=250
+
 " -------------------------------------------------
 
 " nerdcommenter -----------------------------------
@@ -174,17 +221,22 @@ let g:NERDTrimTrailingWhitespace = 1
 " -------------------------------------------------
 
 " YouCompleteMe -----------------------------------
+
+" settings for working with python virtual environments
+let g:ycm_python_interpreter_path = ''
+let g:ycm_python_sys_path = []
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
+let g:ycm_global_ycm_extra_conf = '~/.config/ycm/global_extra_conf.py'
+
 " autoclose preview window
 let g:ycm_autoclose_preview_window_after_completion=1
+
 " goto declaration shortcut
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " -------------------------------------------------
-
-" add colorcolumn at 80 chars for python PEP8 ----
-set cc=80
-hi ColorColumn ctermbg=233
-" ------------------------------------------------
-
 
 " Keymappings ------------------------------------
 " Disable Arrow keys in Normal mode

@@ -1,14 +1,19 @@
 
 # Define Powerline symbols
-left_bold=""
-left_thin=""
-right_bold=""
-right_thin=""
+# left_bold=""
+# left_thin=""
+# right_bold=""
+# right_thin=""
+left_bold=""
+left_thin="|"
+right_bold=""
+right_thin="|"
 music_icon="♫"
 
 # Define colors to be used
 dark_grey_bg=colour236
-accent_color=colour63
+# accent_color=colour63
+accent_color='#57C7FF'
 accent_highlight=colour233
 date_color=colour246
 time_color=colour255
@@ -16,17 +21,14 @@ music_color=colour203
 default_bg=colour234
 
 # Default background and foreground
-set -g status-bg "$default_bg"
-set -g status-fg white
+set -g status-style bg="$default_bg",fg=white
 
 # General settings
 set-option -g status on
 set-option -g status-interval 2
 set-option -g status-justify "left"
-set -g pane-border-bg colour234
-set -g pane-border-fg colour238
-set -g pane-active-border-bg colour234
-set -g pane-active-border-fg colour51
+set -g pane-border-style bg=colour234,fg=colour238
+set -g pane-active-border-style bg=colour234,fg=colour51
 
 # Get generated battery string
 battery="#(sh ~/utilities/battery.sh)"
