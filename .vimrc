@@ -173,6 +173,9 @@ highlight ALEWarningSign ctermbg=208 ctermfg=black
 " dont display errors on statusline
 let g:airline#extensions#ale#enabled = 0
 
+" disable certain warnings in python
+let g:ale_python_flake8_options='--ignore=E731,E402'
+
 " ------------------------------------------------
 
 " vim-airline statusline--------------------------
