@@ -1,0 +1,23 @@
+# Path to your oh-my-zsh installation.
+export ZSH=/home/prdx/.oh-my-zsh
+
+# Set name of the theme to load.
+ZSH_THEME='dpoggi'
+
+# Set default user
+DEFAULT_USER=prdx
+
+# set terminal to UTF-8
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+
+# To support 256 color schemes
+export TERM="xterm-256color"
+
+# Installed plugins
+plugins=(zsh-autosuggestions)
+
+#  Zsh gives a sanity check for 'rm *'
+setopt RM_STAR_WAIT
+
+source $ZSH/oh-my-zsh.sh
