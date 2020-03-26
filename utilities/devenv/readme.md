@@ -1,7 +1,4 @@
 
-Run once
-- docker pull alpine
-
 To build the latest version
 - docker build -t devenv .
 

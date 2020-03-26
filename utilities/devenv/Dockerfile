@@ -14,7 +14,7 @@ RUN mv ohmyzsh/themes/dpoggi.zsh-theme ./ && \
     cp -r zsh-autosuggestions ohmyzsh/custom/plugins/zsh-autosuggestions
 
 # - - final image - -
-FROM python:3.8-alpine
+FROM alpine:latest as devenv
 RUN apk add --no-cache vim zsh
 
 # copy from host
