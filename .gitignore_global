@@ -124,3 +124,7 @@ Session.vim
 *~
 # # Auto-generated tag files
 tags
+
+# js stuff
+node_modules/
+/dist
