@@ -178,8 +178,9 @@ font:
 # Colors (Tomorrow Night)
 colors:
   # Default colors
-  #primary:
-  #  background: '#1d1f21'
+  primary:
+   # background: '#1d1f21'
+   background: '#181819'
   #  foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
@@ -269,13 +270,16 @@ colors:
   # Normal colors
   normal:
    # black:   '#1d1f21'
-   # red:     '#ff5c57'
+   # black:   '#181819'
+   red:     '#fc5d7c'
    green:   '#bff074'
-   yellow:  '#cc94dd'
+   # yellow: '#e7c664'
+   yellow:  '#f0c674'
    blue:    '#74a2cb'
-   magenta: '#f0c674'
+   # blue:    '#7eb2dd'
+   magenta:  '#f39660'
    cyan:    '#70d8cb'
-   # white:   '#c5c8c6'
+   white:   '#c5c8c6'
 
 
   #  black:   '#1d1f21'

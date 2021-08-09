@@ -4,7 +4,7 @@
 " URL: 
 " Author: prdx23
 " License: MIT
-" Last Change: 2021/08/09 23:15
+" Last Change: 2021/08/09 23:28
 " ===============================================================
 
 set background=dark
@@ -33,6 +33,7 @@ hi ALEInfo guifg=#181819 ctermfg=234 guibg=#7eb2dd ctermbg=110 gui=NONE cterm=NO
 hi ALEErrorSign guifg=#fc5d7c ctermfg=204 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi ALEWarningSign guifg=#f39660 ctermfg=209 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi ALEInfoSign guifg=#7eb2dd ctermfg=110 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Normal guifg=#e6e6dc ctermfg=254 guibg=#181819 ctermbg=234 gui=NONE cterm=NONE
 hi ColorColumn guibg=#1b1b1c ctermbg=234 gui=NONE cterm=NONE
 hi Conceal guibg=#2c2e34 ctermbg=236 gui=NONE cterm=NONE
 hi Directory guifg=#7eb2dd ctermfg=110 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -51,7 +52,6 @@ hi CursorLineNr guifg=#4f5462 ctermfg=240 guibg=NONE ctermbg=NONE gui=NONE cterm
 hi MatchParen guifg=#181819 ctermfg=234 guibg=#7eb2dd ctermbg=110 gui=NONE cterm=NONE
 hi MoreMsg guifg=#9ed072 ctermfg=149 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi NonText guifg=#33353f ctermfg=237 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Normal guifg=#e6e6dc ctermfg=254 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Pmenu guifg=#4f5462 ctermfg=240 guibg=#25262c ctermbg=235 gui=NONE cterm=NONE
 hi PmenuSel guifg=#181819 ctermfg=234 guibg=#7eb2dd ctermbg=110 gui=NONE cterm=NONE
 hi PmenuSbar guibg=#2c2e34 ctermbg=236 gui=NONE cterm=NONE

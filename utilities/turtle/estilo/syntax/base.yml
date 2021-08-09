@@ -1,4 +1,5 @@
 # BASE UI
+Normal: 'fg bg'
 ColorColumn: '. dark0'
 Conceal: '. dark2'
 
@@ -29,7 +30,6 @@ MatchParen: 'bg lightblue'
 ModeMsg: ''
 MoreMsg: 'green'
 NonText: 'light1'
-Normal: 'fg'
 
 Pmenu: 'light2 dark1'
 PmenuSel: 'bg lightblue'
