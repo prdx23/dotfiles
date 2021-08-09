@@ -58,19 +58,30 @@ function StatusModeColor()
     endif
 endfunction
 
-highlight StatusLine ctermfg=242 ctermbg=235
-highlight StatusLineHighlight ctermfg=85 ctermbg=235
-highlight StatusLineFlag ctermfg=216 ctermbg=235
-highlight StatusLineRedFlag ctermfg=210 ctermbg=235
-highlight StatusLineNC ctermfg=239 ctermbg=235
-highlight StatusLineNCMid ctermfg=241 ctermbg=236
-highlight StatusLineNCLight ctermfg=233 ctermbg=237
-highlight StatusLineDefault ctermfg=210 ctermbg=233
-highlight StatusLineNormal ctermfg=16 ctermbg=76
-highlight StatusLineInsert ctermfg=17 ctermbg=45
-highlight StatusLineVisual ctermfg=232 ctermbg=214
-highlight StatusLineReplace ctermfg=96 ctermbg=116
-highlight StatusLineMid ctermfg=255 ctermbg=238
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+highlight StatusLine guifg=#4f5462 ctermfg=240 guibg=#1b1b1c ctermbg=234 gui=NONE cterm=NONE
+highlight StatusLineNC guifg=#4f5462 ctermfg=240 guibg=#25262c ctermbg=235 gui=NONE cterm=NONE
+
+highlight StatusLineHighlight guifg=#56ffff ctermfg=87 guibg=#1b1b1c ctermbg=234
+highlight StatusLineFlag guifg=#f39660 ctermfg=209 guibg=#1b1b1c ctermbg=234
+highlight StatusLineRedFlag guifg=#fc5d7c ctermfg=204 guibg=#1b1b1c ctermbg=234
+
+highlight StatusLineNCMid guifg=#4f5462 ctermfg=240 guibg=#2c2e34 ctermfg=236
+highlight StatusLineNCLight guifg=#33353f ctermfg=237 guibg=#4f5462 ctermfg=240
+highlight StatusLineMid guifg=#7f8490 ctermfg=102 guibg=#2c2e34 ctermfg=236
+
+" highlight StatusLineNormal  guifg=#181819 ctermfg=234 guibg=#93d072 ctermfg=149
+highlight StatusLineNormal  guifg=#181819 ctermfg=234 guibg=#fc5d7c ctermfg=149
+" highlight StatusLineNormal guifg=#181819 ctermfg=234 guibg=#7dc3bd ctermfg=149
+
+highlight StatusLineInsert  guifg=#181819 ctermfg=234 guibg=#7eb2dd ctermfg=149
+highlight StatusLineVisual  guifg=#181819 ctermfg=234 guibg=#f39660 ctermfg=149
+highlight StatusLineReplace guifg=#181819 ctermfg=234 guibg=#9c8cc3 ctermfg=149
+highlight StatusLineDefault guifg=#181819 ctermfg=234 guibg=#7dc3bd ctermfg=149
 
 function StatusLineGen(mode)
     let l:line = ''
@@ -94,6 +105,7 @@ function StatusLineGen(mode)
         let l:line .= '%#StatusLineMid#'
         " let l:line .= ' %{FugitiveStatusline()} '
         " let l:line .= ' %{FugitiveHead()} '
+        " let l:line .= ' %{GitStatus()} '
         let l:line .= '%*'
 
         let l:line .= '%#StatusLineFlag# %n:%*'

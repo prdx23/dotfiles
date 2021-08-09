@@ -1,0 +1,59 @@
+javaScriptComment: '' # Comment
+javaScriptLineComment: '' # Comment
+javaScriptCommentTodo: '' # Todo
+javaScriptSpecial: '' # Special
+javaScriptStringS: '' # String
+javaScriptStringD: '' # String
+javaScriptCharacter: '' # Character
+javaScriptSpecialCharacter: '' # javaScriptSpecial
+javaScriptNumber: '' # javaScriptValue
+javaScriptConditional: '' # Conditional
+javaScriptRepeat: '' # Repeat
+javaScriptBranch: '' # Conditional
+javaScriptOperator: '' # Operator
+javaScriptType: '' # Type
+javaScriptStatement: '' # Statement
+javaScriptFunction: '' # Function
+javaScriptBraces: '' # Function
+javaScriptError: '' # Error
+javaScriptParensError: '' # Error
+javaScriptNull: '' # Keyword
+javaScriptBoolean: '' # Boolean
+javaScriptRegexpString: '' # String
+javaScriptIdentifier: '' # Identifier
+javaScriptLabel: '' # Label
+javaScriptException: '' # Exception
+javaScriptMessage: '' # Keyword
+javaScriptGlobal: '' # Keyword
+javaScriptMember: '' # Keyword
+javaScriptDeprecated: '' # Exception
+javaScriptReserved: '' # Keyword
+javaScriptDebug: '' # Debug
+javaScriptConstant: '' # Label
+
+# javascript-syntax plugin
+jsNoise: '@Noise'
+# jsBrackets: '@Operator'
+
+jsFunction: '@Statement'
+jsArrowFunction: '@Statement'
+
+jsGlobalObjects: '@jsBuiltins'
+jsGlobalNodeObjects: '@Identifier'
+jsBuiltins: '@Builtin'
+jsExceptions: '@Structure'
+
+jsObjectProp: '' # Normal
+
+jsObjectKey: '@Identifier' # Normal
+jsObjectKeyString: '' # Normal
+jsObjectKeyComputed: '' # Normal
+jsObjectValue: '' # Normal
+
+jsVariableDef: '@Identifier' # Normal
+jsDestructuringBlock: '@Identifier' # Normal
+jsDestructuringArray: '@Identifier' # Normal
+
+jsParan: '' # Normal
+jsModuleKeyword: '@Identifier' # Normal
+

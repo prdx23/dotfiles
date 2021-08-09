@@ -1,0 +1,104 @@
+# BASE UI
+ColorColumn: '. dark0'
+Conceal: '. dark2'
+
+Cursor: ''
+CursorIM: ''
+CursorColumn: ''
+CursorLine: ''
+
+Directory: 'lightblue'
+
+DiffAdd: 'green dullgreen'
+DiffChange: 'cyan dullblue'
+DiffDelete: 'red dullred'
+DiffText: 'bg lightblue'
+
+ErrorMsg: 'red'
+VertSplit: 'dark1'
+Folded: 'lightblue dark2'
+FoldColumn: ''
+SignColumn: '. dark0'
+
+IncSearch: 'bg orange'
+Search: 'bg yellow'
+
+LineNr: 'light1 dark0'
+CursorLineNr: 'light2'
+MatchParen: 'bg lightblue'
+ModeMsg: ''
+MoreMsg: 'green'
+NonText: 'light1'
+Normal: 'fg'
+
+Pmenu: 'light2 dark1'
+PmenuSel: 'bg lightblue'
+PmenuSbar: '. dark2'
+PmenuThumb: '. light2'
+
+Question: 'orange'
+SpecialKey: 'purple'
+
+SpellBad: 'red . u'
+SpellLocal: 'orange'
+SpellCap: 'yellow'
+SpellRare: 'lightblue'
+
+StatusLine: 'light2 dark0'
+StatusLineNC: 'light2 dark1'
+
+TabLine: ''
+TabLineFill: ''
+TabLineSel: ''
+
+Title: 'cyan'
+Visual: '. selection'
+VisualNOS: '. light3'
+WarningMsg: 'orange'
+WildMenu: 'bg lightblue'
+
+# BASE SYNTAX
+Comment: 'light2'
+Builtin: 'cyan'
+Noise: 'light2'
+
+Constant: 'purple'
+String: 'yellow' # Constant
+Character: '@String' # Constant
+Boolean: '@Constant' # Constant
+Number: 'green' # Constant
+Float: '@Number' # Constant
+
+Identifier: 'blue'
+Function: 'lightblue' # Identifier
+
+Statement: 'red'
+Conditional: '@Statement' # Statement
+Repeat: '@Statement' # Statement
+Label: 'unknown' # Statement
+Operator: 'orange' # Statement
+Keyword: '@Statement' # Statement
+Exception: '@Operator' # Statement
+
+PreProc: 'green'
+Include: '@PreProc' # PreProc
+Define: '@PreProc' # PreProc
+Macro: '@PreProc' # PreProc
+PreCondit: '@PreProc' # PreProc
+
+Type: 'aqua'
+StorageClass: '@Type' # Type
+Structure: '@Type' # Type
+Typedef: '@Type' # Type
+
+Special: 'purple'
+SpecialChar: '@Special' # Special
+Tag: '@Special' # Special
+Delimiter: '@Special' # Special
+SpecialComment: '@Special' # Special
+Debug: '@Special' # Special
+
+Underlined: '. . u'
+Ignore: 'light1'
+Error: 'red'
+Todo: 'light3'

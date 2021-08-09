@@ -1,0 +1,10 @@
+name: 'turtle'
+version: '0.1.0'
+license: 'MIT'
+author: 'prdx23'
+url: ''
+description: ''
+colorschemes:
+  - name: turtle
+    background: 'dark'
+    palette: turtle

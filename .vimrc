@@ -17,10 +17,16 @@ Plugin 'ap/vim-buftabline'
 
 " Themes and colorschemes
 " Plugin 'flazz/vim-colorschemes'
-Plugin 'notpratheek/vim-luna'
-" Plugin 'mhartington/oceanic-next'
+" Plugin 'notpratheek/vim-luna'
+
+" Plugin 'Rigellute/rigel'
+" Plugin 'ghifarit53/tokyonight-vim'
+" Plugin 'sainnhe/sonokai'
+" Plugin 'cocopon/inspecthi.vim'
+
 " Plugin 'ajh17/spacegray.vim'
 " Plugin 'joshdick/onedark.vim'
+" Plugin 'mhartington/oceanic-next'
 
 
 " Python
@@ -90,6 +96,7 @@ set hidden             " allow buffers to be open in background
 set noshowmode         " hide default status line
 set nonu               " hide linenumber column
 set encoding=utf8
+set wildmenu
 set showcmd
 set signcolumn=yes     " enable sign col to be always enabled
 set updatetime=250
@@ -137,44 +144,67 @@ let g:markdown_fenced_languages = [
 
 
 " Colorscheme ------------------------------------
-set term=screen-256color " Enable 256 color schemes
-set t_Co=256
-" set termguicolors
-"
-" " Correct RGB escape codes for vim inside tmux
-" if !has('nvim') && $TERM ==# 'screen-256color'
-"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" endif
+" set term=screen-256color " Enable 256 color schemes
+" set t_Co=256
+set termguicolors
 
-colorscheme luna-term
-" colorscheme onedark
-" colorscheme OceanicNext
-" highlight normal ctermbg=none
-" highlight NonText ctermbg=none
-highlight todo ctermbg=233 ctermfg=208
+" Correct RGB escape codes for vim inside tmux
+if !has('nvim') && $TERM ==# 'screen-256color'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+colorscheme turtle
+" highlight normal ctermbg=none guibg=NONE
+" highlight NonText ctermbg=none guibg=NONE
+" highlight todo ctermbg=233 ctermfg=208
 " ------------------------------------------------
 
 " add colorcolumn at 80 chars for python PEP8 ----
 setlocal textwidth=80
 set cc=80
-hi ColorColumn ctermbg=233
+" hi ColorColumn ctermbg=233
 " ------------------------------------------------
 
+" Show syntax color highlighting groups for word under cursor
+nmap <c-b> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunction
 
 
 " buftabline settings ----------------------------
 let g:buftabline_show=1
 let g:buftabline_numbers=0
 let g:buftabline_separators=1
-highlight BufTabLineCurrent ctermfg=85 ctermbg=232
-highlight BufTabLineActive ctermfg=242 ctermbg=235
-highlight BufTabLineHidden ctermfg=242 ctermbg=235
-highlight BufTabLineFill ctermfg=242 ctermbg=235
 
-highlight BufTabLineModifiedCurrent ctermfg=210 ctermbg=232
-highlight BufTabLineModifiedActive ctermfg=210 ctermbg=235
-highlight BufTabLineModifiedHidden ctermfg=210 ctermbg=235
+highlight BufTabLineCurrent guifg=#56ffff ctermfg=87 guibg=#121213 ctermbg=232
+highlight BufTabLineActive guifg=#7eb2dd ctermfg=149 guibg=#2c2e34 ctermbg=236
+highlight BufTabLineHidden guifg=#7f8490 ctermfg=102 guibg=#2c2e34 ctermbg=236
+highlight link BufTabLineFill StatusLine
+
+highlight BufTabLineModifiedCurrent guifg=#fc5d7c ctermfg=204 guibg=#121213 ctermbg=232
+highlight link BufTabLineModifiedActive BufTabLineModifiedCurrent
+highlight link BufTabLineModifiedHidden BufTabLineModifiedCurrent
+
+" function! GitStatus()
+"     let [a,m,r] = GitGutterGetHunkSummary()
+"     return printf('+%d ~%d -%d', a, m, r)
+" endfunction
+
+" function TabLineGen()
+"     let l:tabline = ''
+"     let l:tabline .= '%{buftabline#render()}'
+"     let l:tabline .= '%='
+"     let l:tabline .= ' %{GitStatus()} '
+"     " let l:line .= ' %{FugitiveStatusline()} '
+"     let l:tabline .= ' %{FugitiveHead()} '
+"     return l:tabline
+" endfunction
+" set tabline=%!TabLineGen()
 " ------------------------------------------------
 
 
@@ -184,7 +214,16 @@ highlight BufTabLineModifiedHidden ctermfg=210 ctermbg=235
 set nofoldenable
 autocmd FileType python setlocal foldenable foldlevel=20
 
-let g:python_highlight_all = 1
+let g:python_highlight_builtins=1
+let g:python_highlight_builtin_funcs_kwarg=1
+let g:python_highlight_exceptions=1
+let g:python_highlight_string_formatting=1
+let g:python_highlight_string_format=1
+let g:python_highlight_string_templates=1
+let g:python_highlight_func_calls=1
+let g:python_highlight_class_vars=1
+let g:python_highlight_operators=1
+" let g:python_highlight_all = 1
 " ------------------------------------------------
 
 
@@ -214,12 +253,6 @@ let g:ale_list_window_size = 5
 
 " error msg format
 let g:ale_echo_msg_format = '[%severity%] %code%: %s'
-highlight ALEError ctermbg=red ctermfg=black
-highlight ALEErrorSign ctermbg=red ctermfg=black
-" highlight ALEErrorLine ctermbg=238
-highlight ALEWarning ctermbg=208 ctermfg=black
-highlight ALEWarningSign ctermbg=208 ctermfg=black
-" highlight ALEWarningLine ctermbg=238
 
 " dont display errors on statusline
 let g:airline#extensions#ale#enabled = 0
@@ -232,12 +265,21 @@ let g:ale_python_flake8_options='--ignore=E731,E402'
 
 " git-gutter settings -----------------------------
 let g:gitgutter_override_sign_column_highlight = 0
-"highlight clear SignColumn
-highlight SignColumn ctermbg=233
-highlight GitGutterAdd ctermfg=green ctermbg=233
-highlight GitGutterChange ctermfg=yellow ctermbg=233
-highlight GitGutterDelete ctermfg=red ctermbg=233
-highlight GitGutterChangeDelete ctermfg=yellow ctermbg=233
+set signcolumn=yes
+let g:gitgutter_set_sign_backgrounds = 1
+" let g:gitgutter_sign_added = '++'
+" let g:gitgutter_sign_modified = '~~'
+" let g:gitgutter_sign_removed = '--'
+" " let g:gitgutter_sign_removed_first_line = '^^'
+" let g:gitgutter_sign_removed_above_and_below = '{'
+" let g:gitgutter_sign_modified_removed = '~-'
+"
+" highlight clear SignColumn
+" highlight SignColumn ctermbg=233
+" highlight GitGutterAdd ctermfg=green ctermbg=233
+" highlight GitGutterChange ctermfg=yellow ctermbg=233
+" highlight GitGutterDelete ctermfg=red ctermbg=233
+" highlight GitGutterChangeDelete ctermfg=yellow ctermbg=233
 
 " -------------------------------------------------
 
@@ -296,9 +338,9 @@ vnoremap <cr> :
 " comment mappings using Commentary
 nmap <leader>c <Plug>Commentary
 nmap <leader>c<space> <Plug>CommentaryLine
-xmap <leader>c<space> <Plug>Commentarygv
+xmap <leader>c<space> <Plug>Commentary
 nmap ? <Plug>CommentaryLine
-xmap ? <Plug>Commentarygv
+xmap ? <Plug>Commentary
 
 " map leader+hh to temporarly turn of highlighting until next search
 nnoremap <leader>hh :noh<cr>

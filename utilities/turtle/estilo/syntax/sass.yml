@@ -1,0 +1,5 @@
+sassCssAttribute: '@cssAttr'
+sassVariable: '@cssStringQ'
+sassMixinName: '@cssFunctionName'
+sassClass: '@cssClassName'
+sassId: '@cssIdentifier'

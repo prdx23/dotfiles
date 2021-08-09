@@ -1,0 +1,4 @@
+YcmErrorSign: 'red'
+YcmWarningSign: 'orange'
+YcmErrorSection: 'bg red'
+YcmWarningSection: 'bg orange'
