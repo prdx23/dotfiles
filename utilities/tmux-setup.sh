@@ -5,11 +5,11 @@ tmux new-session -d -s 'Work' -n 'Dev'
 # Open vim, such that pane remains open when vim closes
 tmux select-pane -T 'vim'
 tmux send-keys "vim --servername tmuxvim" Enter
-# Split into 2 panes in 55:45 ratio
-tmux split-window -h -p 50
+# Split into 2 panes
+tmux split-window -h -p 95
 # Create other usefull windows
 tmux new-window -n 'Home' 
-tmux new-window -n 'Python' 'python'
+# tmux new-window -n 'Python' 'python'
 # Set main window in focus and attach session
 tmux select-window -t 1
 tmux -2 attach-session -t 'Work'

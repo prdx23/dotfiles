@@ -14,6 +14,7 @@ Plugin 'suy/vim-context-commentstring'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'dense-analysis/ale'
 Plugin 'ap/vim-buftabline'
+Plugin 'mhinz/vim-startify'
 
 " Themes and colorschemes
 " Plugin 'flazz/vim-colorschemes'
@@ -183,7 +184,7 @@ let g:buftabline_separators=1
 
 highlight BufTabLineCurrent guifg=#56ffff ctermfg=87 guibg=#121213 ctermbg=232
 highlight BufTabLineActive guifg=#7eb2dd ctermfg=149 guibg=#2c2e34 ctermbg=236
-highlight BufTabLineHidden guifg=#7f8490 ctermfg=102 guibg=#2c2e34 ctermbg=236
+highlight BufTabLineHidden guifg=#7f8490 ctermfg=102 guibg=#121212 ctermbg=232
 highlight link BufTabLineFill StatusLine
 
 highlight BufTabLineModifiedCurrent guifg=#fc5d7c ctermfg=204 guibg=#121213 ctermbg=232
@@ -300,7 +301,49 @@ let g:ycm_auto_hover=''
 
 " autoclose preview window
 let g:ycm_autoclose_preview_window_after_completion=1
-" -------------------------------------------------
+" ------------------------------------------------
+
+
+" Startify ---------------------------------------
+
+let g:startify_bookmarks = [ 
+    \ {'p': '~/Code/projects'},
+    \ {'d': '~/Code/design'},
+    \ {'w': '~/Code/work'},
+    \ ]
+
+let g:startify_lists = [
+    \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+    \ { 'type': 'dir',       'header': [' ',
+    \     '   Recent: '. escape(fnamemodify(getcwd(), ':~'), '\')
+    \     ] },
+    \ ]
+
+let g:startify_files_number = 4
+let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+
+let g:startify_update_oldfiles = 1
+let g:startify_change_to_dir = 1
+let g:startify_enable_special = 0
+let g:startify_fortune_use_unicode = 1
+
+let g:startify_skiplist = [
+    \ 'dist/*',
+    \ 'venv/*',
+    \ ]
+
+let g:startify_custom_header = 'startify#pad(startify#fortune#boxed() + [" "])'
+let g:startify_custom_footer = 'startify#pad([" ", "[e] Empty Buffer    [q] Quit"])'
+
+highlight link StartifyBracket Noise
+highlight link StartifySlash Noise
+highlight link StartifyPath Noise
+highlight link StartifyHeader Identifier
+highlight link StartifyFooter Comment
+highlight link StartifyFile Function
+highlight link StartifyNumber WarningMsg
+
+" ------------------------------------------------
 
 " Keymappings ------------------------------------
 

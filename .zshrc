@@ -34,6 +34,9 @@ alias homegit='/usr/bin/git --git-dir=$HOME/dotfiles/.git/ --work-tree=$HOME'
 # Alias for tmux dev environment 
 alias tdev='sh ~/utilities/tmux-setup.sh'
 
+# alias for fd search
+alias fd='fdfind'
+
 # AWS SSH Aliases
 export AWS='ec2-54-214-216-59.us-west-2.compute.amazonaws.com'
 alias aws='ssh -R 52698:localhost:23698 paradox@$AWS'
