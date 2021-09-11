@@ -4,9 +4,8 @@ ColorColumn: '. dark0'
 Conceal: '. dark2'
 
 Cursor: ''
-CursorIM: ''
-CursorColumn: ''
-CursorLine: ''
+CursorColumn: '. dark1'
+CursorLine: '. dark1'
 
 Directory: 'lightblue'
 
@@ -75,7 +74,7 @@ Function: 'lightblue' # Identifier
 Statement: 'red'
 Conditional: '@Statement' # Statement
 Repeat: '@Statement' # Statement
-Label: 'unknown' # Statement
+Label: 'purple' # Statement
 Operator: 'orange' # Statement
 Keyword: '@Statement' # Statement
 Exception: '@Operator' # Statement

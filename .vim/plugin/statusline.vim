@@ -69,6 +69,7 @@ highlight StatusLineNC guifg=#4f5462 ctermfg=240 guibg=#25262c ctermbg=235 gui=N
 highlight StatusLineHighlight guifg=#56ffff ctermfg=87 guibg=#1b1b1c ctermbg=234
 highlight StatusLineFlag guifg=#f39660 ctermfg=209 guibg=#1b1b1c ctermbg=234
 highlight StatusLineRedFlag guifg=#fc5d7c ctermfg=204 guibg=#1b1b1c ctermbg=234
+highlight StatusLineNCRedFlag guifg=#fc5d7c ctermfg=204 guibg=#25262c ctermbg=234
 
 highlight StatusLineNCMid guifg=#4f5462 ctermfg=240 guibg=#2c2e34 ctermfg=236
 highlight StatusLineNCLight guifg=#33353f ctermfg=237 guibg=#4f5462 ctermfg=240
@@ -83,71 +84,110 @@ highlight StatusLineVisual  guifg=#181819 ctermfg=234 guibg=#f39660 ctermfg=149
 highlight StatusLineReplace guifg=#181819 ctermfg=234 guibg=#9c8cc3 ctermfg=149
 highlight StatusLineDefault guifg=#181819 ctermfg=234 guibg=#7dc3bd ctermfg=149
 
-function StatusLineGen(mode)
+
+function IsNotActiveWindow()
+    return g:statusline_winid != win_getid(winnr())
+endfunction
+
+
+function IsHelpWindow()
+    return getwinvar(g:statusline_winid, "&filetype") == 'help' || getwinvar(g:statusline_winid, "&filetype") == 'man'
+endfunction
+
+
+function IsModified()
+    return getwinvar(g:statusline_winid, "&modified")
+endfunction
+
+
+function StatusLineGen() abort
     let l:line = ''
 
-    if a:mode ==# 'active'
-        if &filetype ==# 'help' || &filetype ==# 'man'
-            let l:line.= '%#StatusLineNormal#'
-            " let l:line.= ' %{toupper(&filetype)} '
-            let l:line.= ' %{&filetype} '
-            let l:line.= '%* %f %r%w'
-            let l:line .= '%='
-            let l:line.=' %#StatusLineNormal#'
-            let l:line .= ' %03l:%03c[%p%%] '
-            return l:line
-        endif
+    if IsNotActiveWindow() && IsHelpWindow()
+        let l:line .= '%#StatusLineNCLight#'
+        let l:line .= ' %{&filetype} '
+        let l:line .= '%*'
 
-        let l:line .= StatusModeColor()
+        let l:line .= '%#StatusLineNC#'
+        let l:line .= ' %f '
+        let l:line .= '%r%w'
+        let l:line .= '%='
+        let l:line .= '%#StatusLineNCLight#'
+        let l:line .= ' %03l:%03c '
+        let l:line .= '%*'
+        return l:line
+    endif
+
+    if IsNotActiveWindow()
+        let l:line .= '%#StatusLineNCLight#'
         let l:line .= ' %{g:currentmode[mode()]} '
         let l:line .= '%*'
 
-        let l:line .= '%#StatusLineMid#'
-        " let l:line .= ' %{FugitiveStatusline()} '
-        " let l:line .= ' %{FugitiveHead()} '
-        " let l:line .= ' %{GitStatus()} '
-        let l:line .= '%*'
-
-        let l:line .= '%#StatusLineFlag# %n:%*'
-        let l:line .= ' %<%.24{expand("%:.:h")}/'
-        let l:line .= '%#StatusLineHighlight#'
-        let l:line .= &modified ? '%#StatusLineRedFlag#%t%m %*' : '%t '
-        let l:line .= '%*'
-        let l:line .= '%#StatusLineFlag#'
-        let l:line .= '%r%h%w'
-        let l:line .= &paste? '[PASTE]' : ''
-        let l:line .= '%*'
-
-        let l:line .= '%='
-
-        let l:line .= ' %Y | %{FileSize()} '
-
-        let l:line .= '%#StatusLineMid#'
-        let l:line .= ''
-        let l:line .= '%*'
-
-        let l:line .= StatusModeColor()
-        let l:line .= ' %03l:%03c '
-    else
-        let l:line .= '%#StatusLineNC#'
-        let l:line .= ' %f '
-        let l:line .= &modified ? '%m' : ''
-        let l:line .= '%r%h%w'
+        let l:line .= '%#StatusLineNC# %n:'
+        let l:line .= ' %<%.24{expand("%:~:.:h")}/'
+        let l:line .= IsModified() ? '%#StatusLineNCRedFlag#%t%m %*' : '%t '
+        let l:line .= '%r%w'
         let l:line .= '%='
         let l:line .= ' %Y | %{FileSize()} '
-        let l:line .= '%#StatusLineNCMid# %*'
+        " let l:line .= '%#StatusLineNCMid#%*'
         let l:line .= '%#StatusLineNCLight#'
         let l:line .= ' %03l:%03c '
+        let l:line .= '%*'
+        return l:line
     endif
+
+    if IsHelpWindow()
+        let l:line .= '%#StatusLineNormal#'
+        let l:line .= ' %{&filetype} '
+        let l:line .= '%*'
+        let l:line .= '%* %f %r%w'
+        let l:line .= '%='
+        let l:line .= ' %#StatusLineNormal#'
+        let l:line .= ' %03l:%03c '
+        return l:line
+    endif
+
+    let l:line .= StatusModeColor()
+    let l:line .= ' %{g:currentmode[mode()]} '
+    let l:line .= '%*'
+
+    let l:line .= '%#StatusLineMid#'
+    " let l:line .= ' %{FugitiveStatusline()} '
+    " let l:line .= ' %{FugitiveHead()} '
+    " let l:line .= ' %{GitStatus()} '
+    let l:line .= '%*'
+
+    let l:line .= '%#StatusLineFlag# %n:%*'
+    " let l:line .= ' %<%.24{fnamemodify(expand("%:.:h"), ":~:.")}/'
+    let l:line .= ' %<%.24{expand("%:~:.:h")}/'
+    let l:line .= '%#StatusLineHighlight#'
+    let l:line .= IsModified() ? '%#StatusLineRedFlag#%t%m %*' : '%t '
+    let l:line .= '%*'
+    let l:line .= '%#StatusLineFlag#'
+    let l:line .= '%r%w'
+    let l:line .= &paste? '[PASTE]' : ''
+    let l:line .= '%*'
+
+    let l:line .= '%='
+
+    let l:line .= ' %Y | %{FileSize()} '
+
+    let l:line .= '%#StatusLineMid#'
+    let l:line .= ''
+    let l:line .= '%*'
+
+    let l:line .= StatusModeColor()
+    let l:line .= ' %03l:%03c '
 
     let l:line .= '%*'
     return l:line
 endfunction
 
-set statusline=%!StatusLineGen('active')
-augroup CustomStatusLine
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * setl statusline=%!StatusLineGen('active')
-    autocmd VimLeave,WinLeave,BufWinLeave * setl statusline=%!StatusLineGen('inactive')
-augroup END
+set statusline=%!StatusLineGen()
+
+" augroup CustomStatusLine
+"     autocmd!
+"     autocmd VimEnter,WinEnter,BufWinEnter * setl statusline=%!StatusLineGen('active')
+"     autocmd VimLeave,WinLeave,BufWinLeave * setl statusline=%!StatusLineGen('inactive')
+" augroup END
 " -------------------------------------------------

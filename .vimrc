@@ -176,6 +176,8 @@ function! <SID>SynStack()
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
+" toggle show-css-color plugin using :ToggleColor
+command! ToggleColor call css_color#toggle()
 
 " buftabline settings ----------------------------
 let g:buftabline_show=1

@@ -4,7 +4,7 @@
 " URL: 
 " Author: prdx23
 " License: MIT
-" Last Change: 2021/08/09 23:28
+" Last Change: 2021/09/07 17:22
 " ===============================================================
 
 set background=dark
@@ -36,6 +36,8 @@ hi ALEInfoSign guifg=#7eb2dd ctermfg=110 guibg=NONE ctermbg=NONE gui=NONE cterm=
 hi Normal guifg=#e6e6dc ctermfg=254 guibg=#181819 ctermbg=234 gui=NONE cterm=NONE
 hi ColorColumn guibg=#1b1b1c ctermbg=234 gui=NONE cterm=NONE
 hi Conceal guibg=#2c2e34 ctermbg=236 gui=NONE cterm=NONE
+hi CursorColumn guibg=#25262c ctermbg=235 gui=NONE cterm=NONE
+hi CursorLine guibg=#25262c ctermbg=235 gui=NONE cterm=NONE
 hi Directory guifg=#7eb2dd ctermfg=110 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi DiffAdd guifg=#9ed072 ctermfg=149 guibg=#43634e ctermbg=239 gui=NONE cterm=NONE
 hi DiffChange guifg=#56ffff ctermfg=87 guibg=#3f4860 ctermbg=238 gui=NONE cterm=NONE
@@ -83,7 +85,7 @@ hi Function guifg=#7eb2dd ctermfg=110 guibg=NONE ctermbg=NONE gui=NONE cterm=NON
 hi Statement guifg=#fc5d7c ctermfg=204 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi link Conditional Statement
 hi link Repeat Statement
-hi Label guifg=#ff00ff ctermfg=13 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Label guifg=#9c8cc3 ctermfg=139 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Operator guifg=#f39660 ctermfg=209 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi link Keyword Statement
 hi link Exception Operator
@@ -149,6 +151,7 @@ hi YcmErrorSign guifg=#fc5d7c ctermfg=204 guibg=NONE ctermbg=NONE gui=NONE cterm
 hi YcmWarningSign guifg=#f39660 ctermfg=209 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi YcmErrorSection guifg=#181819 ctermfg=234 guibg=#fc5d7c ctermbg=204 gui=NONE cterm=NONE
 hi YcmWarningSection guifg=#181819 ctermfg=234 guibg=#f39660 ctermbg=209 gui=NONE cterm=NONE
+hi YCMInverse guifg=#56ffff ctermfg=87 gui=Bold,underline cterm=Bold,underline
 
 if exists('*term_setansicolors')
   let g:terminal_ansi_colors = repeat([0], 16)
