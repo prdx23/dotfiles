@@ -26,9 +26,13 @@ require("telescope").setup({
     }
 })
 
--- require('telescope').load_extension('fzf')
 
-vim.cmd [[ nnoremap <leader>f <cmd>Telescope find_files<cr> ]]
-vim.cmd [[ nnoremap <leader>s <cmd>Telescope live_grep<cr> ]]
-vim.cmd [[ nnoremap <leader>b <cmd>Telescope buffers<cr> ]]
-vim.cmd [[ nnoremap <leader>a <cmd>Telescope lsp_code_actions<cr> ]]
+local builtin = require('telescope.builtin')
+
+vim.keymap.set('n', '<leader>-', builtin.find_files, {})
+vim.keymap.set('n', '<leader>o', builtin.git_files, {})
+vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>e', builtin.diagnostics, {})
+-- vim.keymap.set('n', '<leader>b', builtin.buffers, {})
+-- vim.keymap.set('n', '<leader>a', builtin.lsp_code_actions, {})
+

@@ -3,7 +3,6 @@ call plug#begin(stdpath('data').'/plugged')
 " dependencies
 " Plug 'lewis6991/impatient.nvim'
 Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 
 Plug 'RRethy/vim-hexokinase'
@@ -31,9 +30,9 @@ Plug 'Vimjas/vim-python-pep8-indent'
 
 
 " snippets engine + community snippets
-Plug 'rafamadriz/friendly-snippets'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'rafamadriz/friendly-snippets'
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'saadparwaiz1/cmp_luasnip'
 " Plug 'hrsh7th/vim-vsnip'
 " Plug 'hrsh7th/cmp-vsnip'
 
@@ -60,11 +59,11 @@ Plug '~/Code/projects/asteroid.vim'
 " syntax plugins for non-treesitter langs
 Plug 'chr4/nginx.vim'
 Plug 'glench/vim-jinja2-syntax'
-Plug 'tikhomirov/vim-glsl'
+" Plug 'tikhomirov/vim-glsl'
 
 
 " util stuff
-Plug 'tweekmonster/startuptime.vim'
+" Plug 'tweekmonster/startuptime.vim'
 Plug 'nvim-treesitter/playground'
 Plug 'rktjmp/lush.nvim'
 Plug 'rktjmp/shipwright.nvim'

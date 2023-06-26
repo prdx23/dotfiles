@@ -29,15 +29,61 @@ nnoremap <leader><space> :w<cr>
 nnoremap <cr> :
 vnoremap <cr> :
 
+" recenter screen after move up or down by half page
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" recenter screen on move forward or backward through search
+nnoremap n nzz
+nnoremap N Nzz
+
+" ctrl-w to close buffer (will only work if no unsaved changes)
+nnoremap <C-w> :bw<cr>
+vnoremap <C-w> :bw<cr>
+
+" paste with delete to void buffer
+xnoremap <leader>p "_dP
+
+" delete to void buffer
+vnoremap <leader>d "_d
+
+" copy to clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
 " map leader+hh to temporarly turn of highlighting until next search
 nnoremap <leader>hh :noh<cr>
 
 " map leader+= to reindent the entire file from top to bottom
-nnoremap <leader>= gg=G
+" nnoremap <leader>= gg=G
 
 " map number increment/decrement to alt-= and alt--
 nnoremap <A-=> <C-a>
 nnoremap <A--> <C-x>
 
-" goto declaration shortcut
-" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" open netrw
+nnoremap <leader>= :Ex<cr>
+
+" next and prev buffer navigation
+nnoremap <C-j> :bn<cr>
+nnoremap <C-k> :bp<cr>
+
+" move highlighted block up and down
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '>-2<cr>gv=gv
+
+" Show syntax color highlighting groups for word under cursor
+nmap <c-b> :TSHighlightCapturesUnderCursor<CR>
+
+" replace all mentions of the word under cursor in this buffer
+nnoremap <leader>r :%s/\<<C-r>=expand('<cword>')<CR>\>/
+
+" replace all mentions of the selection in this buffer
+xnoremap <leader>r :<C-u>%s/<C-r>=GetVisualSelection()<CR>/
+function! GetVisualSelection()
+    let old_reg = @v
+    normal! gv"vy
+    let raw_search = @v
+    let @v = old_reg
+    return substitute(escape(raw_search, '\/.*$^~[]'), "\n", '\\n', "g")
+endfunction

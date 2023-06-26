@@ -4,6 +4,7 @@ let g:startify_bookmarks = [
     \ {'d': '~/Code/design'},
     \ {'w': '~/Code/work'},
     \ {'b': '~/Documents/vault/braindump'},
+    \ {'c': '~/Documents/vault/Braindump/Random/vim notes.md'},
     \ ]
 
 let g:startify_lists = [

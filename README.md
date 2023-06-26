@@ -5,10 +5,10 @@ My Dotfiles for Vim, Tmux, Zsh and Alacritty
 ![Screenshot](/Pictures/full-setup.png?raw=true)
 
 ## Themes/Colorschemes  
-  * Nvim Colorscheme: Custom theme i built called asteroid - [asteroid.vim](https://github.com/prdx23/asteroid.vim)
+  * Nvim Colorscheme: Custom theme I built called asteroid - [asteroid.vim](https://github.com/prdx23/asteroid.vim)
   * Nvim Statusline and bufferline: Custom: [statusline.vim](https://github.com/prdx23/dotfiles/blob/master/.config/nvim/plugin/statusline.vim) & [bufferline.vim](https://github.com/prdx23/dotfiles/blob/master/.config/nvim/plugin/bufferline.vim)
   * Tmux Colorscheme: Custom theme, also called asteroid - [asteroid.tmux.sh](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/asteroid.tmux.sh)
-  * Zsh prompt: [Spaceship](https://git.io/spaceship)
+  * Zsh prompt: [Starship](https://starship.rs/)
   * Font: [DejaVu Sans Mono - Nerd Font](https://www.nerdfonts.com/font-downloads)
 
 ## Utils  
@@ -16,7 +16,7 @@ Shell scripts behind this setup (most of these are probably linux only):
 
   * [commands.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/commands.sh) - Some useful shell commands like `sr`, `sd` for tmux split right/down, `mkcd` for mkdir+cd, etc.
   * [alacritty_popup_wayland.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/alacritty_popup_wayland.sh) & [alacritty_popup_xorg.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/alacritty_popup_xorg.sh) - Make alacritty into a dropdown terminal
-  * [spotify.sh](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/spotify.sh) - Get song, artist and album name from spotify using DBus, accepts params so that they can be colored separately in tmux statusline
+  * [spotify.py](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/spotify.py) - Get song, artist and album name from spotify using DBus, accepts params so that they can be colored separately in tmux statusline
   * [battery.sh](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/battery.sh) - Battery capacity with different icons for charging/discharging
   * [uptime.sh](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/uptime.sh) - Nicely formatted uptime
   * [test_24bit_colors.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/test_24bit_colors.sh) - Test if the terminal/tmux support true RGB colors
@@ -59,6 +59,7 @@ chsh -s $(which zsh)
 # logout and login
 # copy .zshrc and .config/zsh
 curl -L git.io/antigen > ~/.config/zsh/antigen.zsh
+curl -sS https://starship.rs/install.sh | sh
 ```
 
 
@@ -80,7 +81,7 @@ sudo make install
 # install vim-plug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-# open nvim and run :PlugInstall then run :LspInstall
+# open nvim and run :PlugInstall then :LspInstall and :MasonInstallAll
 
 # install nvim server
 python3 -m pip install --user pipx

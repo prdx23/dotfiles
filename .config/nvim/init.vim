@@ -12,7 +12,7 @@ runtime plug.vim
 filetype plugin indent on
 
 set showcmd
-" set nowrap
+set nowrap
 set noshowmatch
 let g:loaded_matchparen=1
 set nofoldenable
@@ -24,7 +24,7 @@ set colorcolumn=80
 
 set timeoutlen=500
 set ttimeoutlen=20
-set updatetime=250
+set updatetime=50
 
 
 set mouse=a
@@ -60,6 +60,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+set smartindent
 
 
 " spell
@@ -96,8 +97,8 @@ set noshowmode
 set laststatus=2
 
 
-" Show syntax color highlighting groups for word under cursor
-nmap <c-b> :TSHighlightCapturesUnderCursor<CR>
+autocmd FileType netrw setl bufhidden=wipe
+let g:netrw_fastbrowse=0
 
 
 

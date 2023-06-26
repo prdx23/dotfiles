@@ -1,5 +1,6 @@
 
 window:
+  # opacity: 0.95
   decorations: none
   startup_mode: Fullscreen
   title: Alacritty
@@ -9,11 +10,14 @@ font:
   size: 10.0
 
   normal:
-    family: DejaVuSansMono Nerd Font
-    # style: Regular
+    # family: Iosevka-glitchcomet
+    # family: MesloLGS Nerd Font
+    # family: Inconsolata Nerd Font Propo
+   family: DejaVuSansMono Nerd Font
+   # style: Regular
 
-  #bold:
-    # family: DejaVuSansMono Nerd Font Mono
+  # bold:
+  #   family: MesloLGSDZ Nerd Font
     # style: Bold
 
   #italic:
@@ -24,10 +28,26 @@ font:
     # family: DejaVuSansMono Nerd Font Mono
     # style: Bold Oblique
 
+  #normal:
+  #  family: DejaVuSansMono Nerd Font
+  #  # style: Regular
+
+  ##bold:
+  #  # family: DejaVuSansMono Nerd Font Mono
+  #  # style: Bold
+
+  ##italic:
+  #  # family: DejaVuSansMono Nerd Font Mono
+  #  # style: Oblique
+
+  ##bold_italic:
+  #  # family: DejaVuSansMono Nerd Font Mono
+  #  # style: Bold Oblique
+
 colors:
   primary:
    # background: '#1d1f21'
-   background: '#181819'
+   background: '#141415'
    # foreground: '#c5c8c6'
 
   # Normal colors

@@ -77,20 +77,20 @@ antigen bundle zsh-users/zsh-autosuggestions
 # antigen bundle marlonrichert/zsh-autocomplete
 
 # antigen theme romkatv/powerlevel10k
-antigen theme spaceship-prompt/spaceship-prompt
+# antigen theme spaceship-prompt/spaceship-prompt
 
 antigen apply
 
 # plugin settings
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-# SPACESHIP_TIME_SHOW=true
-# SPACESHIP_USER_SHOW="always"
-# SPACESHIP_HOST_SHOW="always"
+# # SPACESHIP_TIME_SHOW=true
+# # SPACESHIP_USER_SHOW="always"
+# # SPACESHIP_HOST_SHOW="always"
 
-SPACESHIP_EXIT_CODE_SHOW=true
-# SPACESHIP_ASYNC_SHOW_COUNT=true
-SPACESHIP_ASYNC_SYMBOL=""
+# SPACESHIP_EXIT_CODE_SHOW=true
+# # SPACESHIP_ASYNC_SHOW_COUNT=true
+# SPACESHIP_ASYNC_SYMBOL=""
 
 
 # exports
@@ -110,6 +110,7 @@ export PATH=$PATH:"$HOME/.cargo/bin"
 
 # aliases
 alias tdev='sh ~/.config/tmux/tmux-setup.sh'
+alias homegit='/usr/bin/git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME'
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -118,3 +119,8 @@ alias tdev='sh ~/.config/tmux/tmux-setup.sh'
 
 # load custom functions
 [[ ! -f ~/.config/zsh/commands.sh ]] || source ~/.config/zsh/commands.sh
+
+# to install starship - curl -sS https://starship.rs/install.sh | sh
+export STARSHIP_CONFIG=~/.config/zsh/starship.toml
+eval "$(starship init zsh)"
+

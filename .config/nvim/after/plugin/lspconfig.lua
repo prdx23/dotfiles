@@ -1,11 +1,3 @@
- -- pipx install 'python-lsp-server[all]'
- -- npm install -g typescript typescript-language-server
-
- -- npm install -g eslint_d
-
- -- npm install -g yarn
- -- yarn global add diagnostic-languageserver
-
 
 vim.diagnostic.config({
     underline = {
@@ -50,7 +42,7 @@ vim.fn.sign_define('DiagnosticSignHint',  {text = '', texthl = 'DiagnosticSig
 --     end
 -- })
 
-vim.api.nvim_set_keymap('n', '<leader>d<space>', '', {
+vim.keymap.set('n', '<leader>d', '', {
     noremap = true,
     callback = function()
         vim.diagnostic.open_float(nil)
@@ -59,52 +51,35 @@ vim.api.nvim_set_keymap('n', '<leader>d<space>', '', {
 
 ------------------------------------------
 
+local servers = {
+    "rust_analyzer",
+    "pylsp",
+    "tsserver",
+    "eslint",
+    "lua_ls",
+    "clangd",
+    "svelte",
+}
+
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = {
-        -- rust
-        "rust_analyzer",
-        -- python
-        "pylsp", -- 
-        -- js + html/css/others
-        "tsserver",
-        "diagnosticls",
-        -- C/C++
-        "clangd",
-    }
+    ensure_installed = servers
 })
 
 
-local nvim_lsp = require('lspconfig')
 
-local custom_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local opts = { noremap=true, silent=true }
-    -- Mappings
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    -- buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    -- buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    -- buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    -- buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-end
-
-
--- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+local nvim_lsp = require('lspconfig')
+for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+        capabilities = capabilities,
+        flags = {
+            debounce_text_changes = 100,
+        }
+    }
+end
 
 require('rust-tools').setup({
     tools = {
@@ -114,79 +89,106 @@ require('rust-tools').setup({
             highlight = "NonText",
         }
     },
-    server = {
-        on_attach = on_attach,
-    }
 })
 
 
-local servers = { 'pylsp', 'tsserver' }
--- local servers = { 'pylsp' }
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        on_attach = custom_attach,
-        -- handlers = custom_handlers,
-        capabilities = capabilities,
-        flags = {
-            debounce_text_changes = 100,
+nvim_lsp.lua_ls.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
         }
     }
-end
+}
+
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, { border = "rounded", }
+)
+
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+        -- Buffer local mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local opts = { buffer = ev.buf }
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, opts)
+        -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+        -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+        -- vim.keymap.set('n', '<space>wl', function()
+        --     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        -- end, opts)
+        vim.keymap.set('n', '<leader>ld', vim.lsp.buf.type_definition, opts)
+        -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+        vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references, opts)
+        -- vim.keymap.set('n', '<space>f', function()
+        --     vim.lsp.buf.format { async = true }
+        -- end, opts)
+    end,
+})
 
 -- nvim_lsp.tsserver.setup{
 --     on_attach = custom_attach
 -- }
 
-nvim_lsp.diagnosticls.setup {
-    on_attach = on_attach,
-    -- handlers = custom_handlers,
-    capabilities = capabilities,
-    filetypes = {
-        'javascript', 'javascriptreact', 'vue',
-        'json',
-        'typescript', 'typescriptreact',
-        'css', 'less', 'scss',
-        'markdown', 'pandoc'
-    },
-    init_options = {
-        linters = {
-            eslint = {
-                command = 'eslint_d',
-                rootPatterns = { '.git' },
-                debounce = 100,
-                args = { 
-                    '--stdin', '--stdin-filename', '%filepath', 
-                    '--format', 'json' 
-                },
-                sourceName = 'eslint_d',
-                parseJson = {
-                    errorsRoot = '[0].messages',
-                    line = 'line',
-                    column = 'column',
-                    endLine = 'endLine',
-                    endColumn = 'endColumn',
-                    -- message = '[eslint] ${message} [${ruleId}]',
-                    message = '[${ruleId}] ${message}',
-                    security = 'severity'
-                },
-                securities = {
-                    ["2"] = 'error',
-                    ["1"] = 'warning'
-                }
-            },
-        },
-        filetypes = {
-            javascript = 'eslint',
-            javascriptreact = 'eslint',
-            vue = 'eslint',
-            typescript = 'eslint',
-            typescriptreact = 'eslint',
-            -- markdown = 'markdownlint',
-            -- pandoc = 'markdownlint'
-        },
-        formatters = {},
-        formatFiletypes = {}
-    }
-}
+-- nvim_lsp.diagnosticls.setup {
+--     on_attach = on_attach,
+--     -- handlers = custom_handlers,
+--     capabilities = capabilities,
+--     filetypes = {
+--         'javascript', 'javascriptreact', 'vue',
+--         'json',
+--         'typescript', 'typescriptreact',
+--         'css', 'less', 'scss',
+--         'markdown', 'pandoc'
+--     },
+--     init_options = {
+--         linters = {
+--             eslint = {
+--                 command = 'eslint_d',
+--                 rootPatterns = { '.git' },
+--                 debounce = 100,
+--                 args = { 
+--                     '--stdin', '--stdin-filename', '%filepath', 
+--                     '--format', 'json' 
+--                 },
+--                 sourceName = 'eslint_d',
+--                 parseJson = {
+--                     errorsRoot = '[0].messages',
+--                     line = 'line',
+--                     column = 'column',
+--                     endLine = 'endLine',
+--                     endColumn = 'endColumn',
+--                     -- message = '[eslint] ${message} [${ruleId}]',
+--                     message = '[${ruleId}] ${message}',
+--                     security = 'severity'
+--                 },
+--                 securities = {
+--                     ["2"] = 'error',
+--                     ["1"] = 'warning'
+--                 }
+--             },
+--         },
+--         filetypes = {
+--             javascript = 'eslint',
+--             javascriptreact = 'eslint',
+--             vue = 'eslint',
+--             typescript = 'eslint',
+--             typescriptreact = 'eslint',
+--             -- markdown = 'markdownlint',
+--             -- pandoc = 'markdownlint'
+--         },
+--         formatters = {},
+--         formatFiletypes = {}
+--     }
+-- }
 
 
