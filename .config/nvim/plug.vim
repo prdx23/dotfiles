@@ -9,7 +9,8 @@ Plug 'RRethy/vim-hexokinase'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
+Plug 'numToStr/Comment.nvim'
 Plug 'mhinz/vim-startify'
 
 

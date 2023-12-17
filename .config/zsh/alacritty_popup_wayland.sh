@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 # requires gnome extension - https://github.com/ickyicky/window-calls
 
 
@@ -49,7 +49,7 @@ if [ -z "$(pgrep --exact alacritty)" ]; then
     alacritty &
     sleep 0.2
     set_winid
-    echo $WINID
+    # echo $WINID
     move_to_monitor
     # minimize
     exit 0
@@ -77,6 +77,6 @@ else
     activate
 fi
 
-echo $CURRENT_WORKSPACE
-echo $WINID
-echo $IS_VISIBLE
+# echo $CURRENT_WORKSPACE
+# echo $WINID
+# echo $IS_VISIBLE
