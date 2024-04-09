@@ -68,22 +68,22 @@ run() {
 }
 
 # minimize guake and refresh the active tab on browser
-singlemonitor() {
-    xdotool key 'shift+BackSpace'
-    xdotool windowactivate $(xdotool search --onlyvisible --class $1|head -1)
-    xdotool key 'ctrl+r'
-}
+# singlemonitor() {
+#     xdotool key 'shift+BackSpace'
+#     xdotool windowactivate $(xdotool search --onlyvisible --class $1|head -1)
+#     xdotool key 'ctrl+r'
+# }
 
 # switch to browser on other monitor, refresh, and switch back
-multimonitor() {
-    xdotool windowactivate $(xdotool search --onlyvisible --desktop=0 --class $1|head -1)
-    xdotool key 'ctrl+r'
-    xdotool windowactivate $(xdotool search --onlyvisible --class Guake|head -1)
-}
+# multimonitor() {
+#     xdotool windowactivate $(xdotool search --onlyvisible --desktop=0 --class $1|head -1)
+#     xdotool key 'ctrl+r'
+#     xdotool windowactivate $(xdotool search --onlyvisible --class Guake|head -1)
+# }
 
-autoserve() {
-    browser-sync start -s -w -f . --host $(host -I) --port 9000 --no-open --no-inject-changes
-}
+# autoserve() {
+#     browser-sync start -s -w -f . --host $(host -I) --port 9000 --no-open --no-inject-changes
+# }
 
 # excecute any function in this file using the cmd:
 # ./commands.sh [function name] [function params]

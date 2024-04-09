@@ -24,12 +24,12 @@ unsetopt beep
 # stty stop undef     # Disable ctrl-s to freeze terminal.
 zle_highlight=('paste:none')
 
-# autoload -U up-line-or-beginning-search
-# autoload -U down-line-or-beginning-search
-# zle -N up-line-or-beginning-search
-# zle -N down-line-or-beginning-search
-# bindkey "$terminfo[kcuu1]" up-line-or-beginning-search # Up
-# bindkey "$terminfo[kcud1]" down-line-or-beginning-search # Down
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 
 
 
@@ -111,6 +111,7 @@ export PATH=$PATH:"$HOME/.cargo/bin"
 # aliases
 alias tdev='sh ~/.config/tmux/tmux-setup.sh'
 alias homegit='/usr/bin/git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME'
+alias hs='history 1 | cut -c 8- | sort -u | rg'
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

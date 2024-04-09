@@ -59,6 +59,8 @@ local servers = {
     "lua_ls",
     "clangd",
     "svelte",
+    "tailwindcss",
+    "unocss",
 }
 
 require("mason").setup()
