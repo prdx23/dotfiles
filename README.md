@@ -6,7 +6,7 @@ My Dotfiles for Vim, Tmux, Zsh and Alacritty
 
 ## Themes/Colorschemes  
   * Nvim Colorscheme: Custom theme I built called asteroid - [asteroid.vim](https://github.com/prdx23/asteroid.vim)
-  * Nvim Statusline and bufferline: Custom: [statusline.vim](https://github.com/prdx23/dotfiles/blob/master/.config/nvim/plugin/statusline.vim) & [bufferline.vim](https://github.com/prdx23/dotfiles/blob/master/.config/nvim/plugin/bufferline.vim)
+  * Nvim Statusline and bufferline: Custom: [statusline.lua](https://github.com/prdx23/dotfiles/blob/master/.config/nvim/lua/statusline.lua)
   * Tmux Colorscheme: Custom theme, also called asteroid - [asteroid.tmux.sh](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/asteroid.tmux.sh)
   * Zsh prompt: [Starship](https://starship.rs/)
   * Font: [DejaVu Sans Mono - Nerd Font](https://www.nerdfonts.com/font-downloads)
