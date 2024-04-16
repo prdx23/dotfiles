@@ -378,9 +378,9 @@ end
 
 vim.opt.showtabline = 2
 function RefreshStatusLine()
-    vim.api.nvim_exec([[
+    vim.api.nvim_exec2([[
         set statusline=%!v:lua.Statusline()
         set tabline=%!v:lua.Tabline()
-    ]], false)
+    ]], { output = false })
 end
 RefreshStatusLine()

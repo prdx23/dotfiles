@@ -64,9 +64,19 @@ nnoremap <A--> <C-x>
 " open netrw
 nnoremap <leader>= :Ex<cr>
 
+" open vim notes file in obsidian
+nnoremap <leader>fc :e ~/Documents/vault/Braindump/Random/vim notes.md<cr>
+
+" open global todo file
+nnoremap <leader>ft :e ~/todo.md<cr>
+
 " next and prev buffer navigation
 nnoremap <C-j> :bn<cr>
 nnoremap <C-k> :bp<cr>
+
+" next and prev quickfix navigation
+autocmd FileType qf nnoremap <C-j> :cn<cr>
+autocmd FileType qf nnoremap <C-k> :cp<cr>
 
 " move highlighted block up and down
 vnoremap J :m '>+1<cr>gv=gv
