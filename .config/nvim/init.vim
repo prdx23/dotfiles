@@ -128,7 +128,7 @@ set pumblend=0
 " colorscheme
 syntax on
 set termguicolors
-colorscheme asteroid
+" colorscheme asteroid
 
 
 " statusline

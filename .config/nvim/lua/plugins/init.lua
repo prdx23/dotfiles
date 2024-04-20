@@ -6,8 +6,18 @@ return {
     --     "prdx23/asteroid.vim",
     --     lazy = false,
     --     priority = 1000,
+    --     config = function ()
+    --         vim.cmd.colorscheme("asteroid")
+    --     end
     -- },
-    { dir = "~/Code/projects/asteroid.vim" },
+    {
+        dir = "~/Code/projects/asteroid.vim",
+        lazy = false,
+        priority = 1000,
+        config = function ()
+            vim.cmd.colorscheme("asteroid")
+        end
+    },
 
 
     {
@@ -34,10 +44,10 @@ return {
         ft = { 'nginx' }
     },
 
-    {
-        'glench/vim-jinja2-syntax',
-        ft = { 'htmljinja', 'jinja', 'jinja.html' }
-    },
+    -- {
+    --     'glench/vim-jinja2-syntax',
+    --     ft = { 'htmljinja', 'jinja', 'jinja.html' }
+    -- },
 
     -- {
     --     'RRethy/vim-hexokinase',

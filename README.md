@@ -1,6 +1,6 @@
 # Dotfiles
 
-My Dotfiles for Vim, Tmux, Zsh and Alacritty
+My Dotfiles for Neovim, Tmux, Zsh and Alacritty
 
 ![Screenshot](/Pictures/full-setup.png?raw=true)
 
@@ -78,19 +78,12 @@ make CMAKE_BUILD_TYPE=Release
 sudo make install
 
 # copy .config/nvim
-# install vim-plug
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-# open nvim and run :PlugInstall then :LspInstall and :MasonInstallAll
+# open nvim and lazy.nvim should install all plugins
 
 # install nvim server
 python3 -m pip install --user pipx
 python3 -m pipx ensurepath
 pipx install 'neovim-remote'
-
-# hexokinase plugin setup
-cd ~/.local/share/nvim/plugged/vim-hexokinase
-make hexokinase
 ```
 
 

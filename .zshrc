@@ -107,6 +107,7 @@ export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"/usr/local/go/bin"
 # export PATH=$PATH:"$(yarn global bin)"
 export PATH=$PATH:"$HOME/.cargo/bin"
+export PATH=$PATH:"$HOME/.bun/bin"
 
 # aliases
 alias tdev='sh ~/.config/tmux/tmux-setup.sh'
@@ -125,3 +126,10 @@ alias hs='history 1 | cut -c 8- | sort -u | rg'
 export STARSHIP_CONFIG=~/.config/zsh/starship.toml
 eval "$(starship init zsh)"
 
+
+# bun completions
+[ -s "/home/prdx/.bun/_bun" ] && source "/home/prdx/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

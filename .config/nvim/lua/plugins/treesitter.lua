@@ -34,6 +34,8 @@ local function treesitter_config()
     vim.api.nvim_set_hl(0, "@type.qualifier.glsl", { link = "Keyword" })
     -- vim.api.nvim_set_hl(0, "@type.builtin.glsl", { link = "@function.builtin" })
 
+    vim.api.nvim_set_hl(0, "@function.htmldjango", { link = "Special" })
+
     -- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
     -- parser_config.javascript.used_by = "vue"
 
@@ -110,12 +112,20 @@ return {
         end
     },
 
+    -- {
+    --     'windwp/nvim-ts-autotag',
+    --     config = function()
+    --         require('nvim-ts-autotag').setup()
+    --     end
+    -- },
+    -- TEMP: until fixed upstream ---------------------------------------------
     {
-        'windwp/nvim-ts-autotag',
+        dir = "~/Code/source/nvim-ts-autotag",
         config = function()
             require('nvim-ts-autotag').setup()
         end
     },
+    -- TEMP -------------------------------------------------------------------
 
     {
         'nvim-treesitter/playground',

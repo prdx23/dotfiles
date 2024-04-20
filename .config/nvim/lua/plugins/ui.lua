@@ -57,7 +57,7 @@ return {
                 window = {
                     -- normal_hl = "NormalFloat",
                     border = "single",
-                    align = 'top',
+                    align = 'bottom',
                     max_width = 60,
                     x_padding = 0,
                     y_padding = 0,

@@ -27,6 +27,7 @@ return {
 
             require('mini.surround').setup()
 
+            -- require('mini.notify').setup()
         end,
     }
 
