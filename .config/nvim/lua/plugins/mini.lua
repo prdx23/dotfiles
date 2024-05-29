@@ -19,7 +19,7 @@ return {
                     c = spec_treesitter({
                         a = '@class.outer', i = '@class.inner'
                     }),
-                    p = spec_treesitter({
+                    j = spec_treesitter({
                         a = '@parameter.outer', i = '@parameter.inner'
                     }),
                 }

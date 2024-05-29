@@ -85,8 +85,23 @@ return {
         "m4xshen/hardtime.nvim",
         cmd = { 'Hardtime' },
         dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-        opts = {
-            enabled = false,
-        }
+        config = function()
+            require('hardtime').setup({
+                enabled = false,
+                max_count = 6,
+                disable_mouse = false,
+                restricted_keys = {
+                    -- enter is reassigned
+                    ["<CR>"] = {},
+                },
+                disabled_keys = {
+                    -- arrow keys are already noop
+                    ["<Up>"] = {},
+                    ["<Down>"] = {},
+                    ["<Left>"] = {},
+                    ["<Right>"] = {},
+                },
+            })
+        end,
     },
 }

@@ -8,12 +8,11 @@ local function cmp_config()
 
 
     cmp.setup({
-        -- snippet = {
-        --     expand = function(args)
-        --         luasnip.lsp_expand(args.body)
-        --         -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-        --     end,
-        -- },
+        snippet = {
+            expand = function(args)
+                vim.snippet.expand(args.body)
+            end,
+        },
         view = {
             entries = "custom" -- can be "custom", "wildmenu" or "native"
         },

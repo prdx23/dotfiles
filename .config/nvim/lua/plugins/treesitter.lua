@@ -27,14 +27,15 @@ local function treesitter_config()
 
     })
 
-    vim.api.nvim_set_hl(0, "@type.qualifier.rust", { link = "Keyword" })
-    vim.api.nvim_set_hl(0, "@storageclass.rust", { link = "Keyword" })
-    vim.api.nvim_set_hl(0, "@storageclass.lifetime.rust", { link = "Special" })
+    -- vim.api.nvim_set_hl(0, "@type.qualifier.rust", { link = "Keyword" })
+    -- vim.api.nvim_set_hl(0, "@storageclass.rust", { link = "Keyword" })
+    -- vim.api.nvim_set_hl(0, "@storageclass.lifetime.rust", { link = "Special" })
 
-    vim.api.nvim_set_hl(0, "@type.qualifier.glsl", { link = "Keyword" })
+    -- vim.api.nvim_set_hl(0, "@type.qualifier.glsl", { link = "Keyword" })
     -- vim.api.nvim_set_hl(0, "@type.builtin.glsl", { link = "@function.builtin" })
 
     vim.api.nvim_set_hl(0, "@function.htmldjango", { link = "Special" })
+
 
     -- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
     -- parser_config.javascript.used_by = "vue"

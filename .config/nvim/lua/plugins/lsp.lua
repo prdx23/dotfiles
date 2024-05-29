@@ -89,9 +89,9 @@ local function lspconfig()
             vim.keymap.set('n', '<space>ln', vim.lsp.buf.rename, opts)
             vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
             vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references, opts)
-            -- vim.keymap.set('n', '<space>f', function()
-            --     vim.lsp.buf.format { async = true }
-            -- end, opts)
+            vim.keymap.set('n', '<leader>lf', function()
+                vim.lsp.buf.format { async = true }
+            end, opts)
         end,
     })
 
@@ -107,7 +107,14 @@ local function lspconfig()
 
         pylsp = {},
 
-        eslint = {},
+        eslint = {
+            settings = {
+                options = {
+                    -- cache = true,
+                    -- overrideConfigFile = vim.fn.stdpath("config"),
+                }
+            }
+        },
 
         gopls = {},
 
@@ -250,5 +257,11 @@ return {
     --         })
     --     end
     -- },
+
+    {
+        "folke/trouble.nvim",
+        branch = "dev", -- IMPORTANT!
+        opts = {},
+    }
 
 }
