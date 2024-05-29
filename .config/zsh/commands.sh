@@ -1,18 +1,91 @@
 #!/bin/bash
 
+
+alias hs='history 1 | cut -c 8- | sort -u | rg'
+
+
+
 # make a directory and cd to it
-mkcd() { 
-    test -d "$1" || mkdir -p "$1" && cd "$1" 
+mkcd() {
+    test -d "$1" || mkdir -p "$1" && cd "$1"
 }
 
 # automatically do ls when using cd command
 chpwd() {
     emulate -L zsh
-    ls 
+    ls
 }
 
+# helper to easily tunnel a port to a specific server
+live() {
+    if [[ $1 == "glitchcomet" ]]; then
+        secret=$GCLIVE_SECRET
+        server_port=2142
+    elif [[ $1 == "andrepeat" ]]; then
+        secret=$ARLIVE_SECRET
+        server_port=2140
+    else
+        echo "server $1 not available"
+        return
+    fi
+
+    url="localhost.$1.com"
+    echo "-> Tunnelling port $2 to $url"
+    bore local $2 --to $url --secret=$secret --port $server_port
+}
+
+# open a project folder from anywhere
+goto() {
+    dir=$(fd \
+        --type directory \
+        --base-directory ~ \
+        --search-path Code \
+        --no-require-git \
+        --color always \
+    | fzf \
+        --ansi \
+        --reverse \
+        --inline-info \
+        --height=20% \
+        --keep-right \
+    )
+    # --search-path .config \
+
+    if [[ ! -z "$dir" ]]; then
+        cd "$HOME/$dir"
+    fi
+}
+
+# zle -N goto
+# bindkey '^g' goto
+
+
+
+# open file/files in current git project in nvim
+code() {
+    project_root=$(git rev-parse --show-toplevel)
+    if [[ -z "$project_root" ]]; then
+        return
+    fi
+
+    fd \
+        --type file \
+        --base-directory $project_root \
+        --color always \
+    | fzf \
+        --ansi \
+        --reverse \
+        --multi \
+        --inline-info \
+        --height=20% \
+        --keep-right \
+        --print0 \
+    | xargs -0 -o -i -r nvim --cmd "cd $project_root" $project_root/{}
+}
+
+
 # open file in the main vim pane
-v() { 
+v() {
     # vim --servername tmuxvim --remote "$1" 
     nvr $1
     tmux select-window -t 'Dev'
@@ -35,24 +108,24 @@ v() {
 # }
 
 # send keys to the main vim pane
-vk() { 
-    vim --servername tmuxvim --remote-send "$1" 
+vk() {
+    vim --servername tmuxvim --remote-send "$1"
 }
 
 # change vim's working directory to the one open the current shell
-vcd() { 
+vcd() {
     # vim --servername tmuxvim --remote-send "<ESC>:cd $(pwd)<CR>"
     nvr --remote-send "<ESC>:cd $(pwd)<CR>"
 }
 
 # split current pane vertically with pwd
-sd() { 
-    tmux split-window -c "#{pane_current_path}" 
+sd() {
+    tmux split-window -c "#{pane_current_path}"
 }
 
 # split current pane horizantly with pwd
-sr() { 
-    tmux split-window -h -c "#{pane_current_path}" 
+sr() {
+    tmux split-window -h -c "#{pane_current_path}"
 }
 
 # watch for changes in given file and excecute given command
@@ -63,7 +136,7 @@ sr() {
 # run test.py python -m doctest test.py
 # run test.html -c ~/utilities/commands.sh singlemonitor Chrome
 # run test.html -c ~/utilities/commands.sh multimonitor Firefox
-run() { 
+run() {
     find . -name "$1" | entr "${@:2}"
 }
 
@@ -88,7 +161,7 @@ run() {
 # excecute any function in this file using the cmd:
 # ./commands.sh [function name] [function params]
 # Ex: ./commands.sh singlemonitor Chrome
-if [ "$1" != "" ]
-then
-    "$1" "${@:2}"
-fi
+# if [ "$1" != "" ]
+# then
+#     "$1" "${@:2}"
+# fi

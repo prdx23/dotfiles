@@ -32,6 +32,9 @@ bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
 
+# load custom shell variables
+set -o allexport; source ~/.env; set +o allexport
+
 
 # completions
 setopt menucomplete
@@ -112,7 +115,6 @@ export PATH=$PATH:"$HOME/.bun/bin"
 # aliases
 alias tdev='sh ~/.config/tmux/tmux-setup.sh'
 alias homegit='/usr/bin/git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME'
-alias hs='history 1 | cut -c 8- | sort -u | rg'
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -127,9 +129,17 @@ export STARSHIP_CONFIG=~/.config/zsh/starship.toml
 eval "$(starship init zsh)"
 
 
+# Set up fzf key bindings and fuzzy completion
+# eval "$(fzf --zsh)"
+source /usr/share/fzf/shell/key-bindings.zsh
+export FZF_CTRL_R_OPTS="
+  --reverse
+  --height=30%
+"
+
+
+
+
 # bun completions
 [ -s "/home/prdx/.bun/_bun" ] && source "/home/prdx/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"

@@ -4,17 +4,17 @@ My Dotfiles for Neovim, Tmux, Zsh and Alacritty
 
 ![Screenshot](/Pictures/full-setup.png?raw=true)
 
-## Themes/Colorschemes  
+## Themes/Colorschemes
   * Nvim Colorscheme: Custom theme I built called asteroid - [asteroid.vim](https://github.com/prdx23/asteroid.vim)
   * Nvim Statusline and bufferline: Custom: [statusline.lua](https://github.com/prdx23/dotfiles/blob/master/.config/nvim/lua/statusline.lua)
   * Tmux Colorscheme: Custom theme, also called asteroid - [asteroid.tmux.sh](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/asteroid.tmux.sh)
   * Zsh prompt: [Starship](https://starship.rs/)
   * Font: [DejaVu Sans Mono - Nerd Font](https://www.nerdfonts.com/font-downloads)
 
-## Utils  
-Shell scripts behind this setup (most of these are probably linux only):  
+## Utils
+Shell scripts behind this setup (most of these are probably linux only):
 
-  * [commands.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/commands.sh) - Some useful shell commands like `sr`, `sd` for tmux split right/down, `mkcd` for mkdir+cd, etc.
+  * [commands.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/commands.sh) - Some useful shell commands like `goto`, `code`, `sr`/`sd` for tmux split right/down, `mkcd` for mkdir+cd, etc.
   * [alacritty_popup_wayland.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/alacritty_popup_wayland.sh) & [alacritty_popup_xorg.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/alacritty_popup_xorg.sh) - Make alacritty into a dropdown terminal
   * [spotify.py](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/spotify.py) - Get song, artist and album name from spotify using DBus, accepts params so that they can be colored separately in tmux statusline
   * [battery.sh](https://github.com/prdx23/dotfiles/blob/master/.config/tmux/battery.sh) - Battery capacity with different icons for charging/discharging
@@ -22,14 +22,14 @@ Shell scripts behind this setup (most of these are probably linux only):
   * [test_24bit_colors.sh](https://github.com/prdx23/dotfiles/blob/master/.config/zsh/test_24bit_colors.sh) - Test if the terminal/tmux support true RGB colors
 
 
-## First time setup  
+## First time setup
 This is mostly for my personal use but if you are following along this repo, this might help
 
 
 ### Initial setup
 ```sh
 sudo dnf update
-sudo dnf install git curl gcc clang make ripgrep wl-clipboard
+sudo dnf install git curl gcc clang make entr ripgrep wl-clipboard fzf jq fd-find
 git config --global user.email "..."
 git config --global user.name "Arsh"
 git config --global credential.helper store
@@ -40,13 +40,14 @@ git config --global init.defaultBranch main
 
 sudo dnf install python3-pip
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sudo dnf install npm
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf <go tar file>
 ```
 
 
 ### Alacritty
 ```sh
-sudo dnf install alacritty jq xrandr wmctrl
+sudo dnf install alacritty xrandr wmctrl
 # copy .config/alacritty/
 # set keyboard shortcut for alacritty_popup_wayland.sh/alacritty_popup_xorg.sh
 ```
@@ -54,7 +55,7 @@ sudo dnf install alacritty jq xrandr wmctrl
 
 ### Zsh
 ```sh
-sudo dnf install zsh entr
+sudo dnf install zsh
 chsh -s $(which zsh)
 # logout and login
 # copy .zshrc and .config/zsh
