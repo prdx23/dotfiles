@@ -37,10 +37,6 @@ nnoremap <C-u> <C-u>zz
 nnoremap n nzz
 nnoremap N Nzz
 
-" ctrl-w to close buffer (will only work if no unsaved changes)
-nnoremap <C-w> :bw<cr>
-vnoremap <C-w> :bw<cr>
-
 " paste with delete to void buffer
 xnoremap <leader>p "_dP
 
@@ -73,6 +69,10 @@ nnoremap <leader>ft :e ~/todo.md<cr>
 " next and prev buffer navigation
 nnoremap <C-j> :bn<cr>
 nnoremap <C-k> :bp<cr>
+
+" ctrl-w to close buffer (will only work if no unsaved changes)
+nnoremap <leader>w :bw<cr>
+vnoremap <leader>w :bw<cr>
 
 " next and prev quickfix navigation
 autocmd FileType qf nnoremap <C-j> :cn<cr>

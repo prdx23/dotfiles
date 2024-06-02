@@ -8,15 +8,19 @@ local function cmp_config()
 
 
     cmp.setup({
+
         snippet = {
             expand = function(args)
                 vim.snippet.expand(args.body)
             end,
         },
+
         view = {
-            entries = "custom" -- can be "custom", "wildmenu" or "native"
+            entries = { name = 'custom',  selection_order = 'near_cursor' },
         },
+
         preselect = cmp.PreselectMode.None,
+
         mapping = cmp.mapping.preset.insert({
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -38,36 +42,7 @@ local function cmp_config()
                 end
             end,
         }),
-        -- mapping = {
-        --     -- ['<C-p>'] = cmp.mapping.select_prev_item(),
-        --     -- ['<C-n>'] = cmp.mapping.select_next_item(),
-        --     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        --     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        --     -- ['<C-Space>'] = cmp.mapping.complete(),
-        --     ['<C-e>'] = cmp.mapping.close(),
-        --     -- ['<CR>'] = cmp.mapping.confirm {
-        --     --     behavior = cmp.ConfirmBehavior.Replace,
-        --     --     select = true,
-        --     -- },
-        --     -- ['<Tab>'] = function(fallback)
-        --     --     if cmp.visible() then
-        --     --         cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-        --     --     elseif luasnip.expand_or_jumpable() then
-        --     --         luasnip.expand_or_jump()
-        --     --     else
-        --     --         fallback()
-        --     --     end
-        --     -- end,
-        --     -- ['<S-Tab>'] = function(fallback)
-        --     --     if cmp.visible() then
-        --     --         cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-        --     --     elseif luasnip.jumpable(-1) then
-        --     --         luasnip.jump(-1)
-        --     --     else
-        --     --         fallback()
-        --     --     end
-        --     -- end,
-        -- },
+
         sources = cmp.config.sources({
             -- { name = 'nvim_lsp', max_item_count = 15 },
             { name = 'nvim_lsp' },
@@ -84,15 +59,16 @@ local function cmp_config()
             -- { name = 'luasnip', max_item_count = 5 },
             -- { name = 'vsnip' },
         }),
+
         window = {
             documentation = {
                 border = 'single',
             },
         },
+
         formatting = {
             format = function(entry, vim_item)
                 local formatted = lspkind.cmp_format({
-                    -- with_text = true,
                     mode = "symbol_text",
                     -- maxwidth = 35,
                     menu = ({
@@ -113,9 +89,14 @@ local function cmp_config()
                     formatted.kind = '󰃬 Result'
                 end
 
+                if entry.source.name == 'treesitter' and string.sub(formatted.kind, 1, 1) == ' ' then
+                    formatted.kind = '󱁉' .. formatted.kind
+                end
+
                 return formatted
             end
         },
+
         sorting = {
             comparators = {
                 cmp.config.compare.offset,
@@ -128,24 +109,66 @@ local function cmp_config()
                 cmp.config.compare.order,
             },
         },
+
     })
 
-    -- cmp.setup.cmdline('/', {
-    --     sources = {
-    --         { name = 'buffer' }
-    --     }
-    -- })
 
-    -- cmp.setup.cmdline(':', {
-    --     sources = cmp.config.sources({
-    --         { name = 'path' }
-    --     }, {
-    --         { name = 'cmdline' }
-    --     })
-    -- })
+    cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = 'buffer', keyword_length = 2 }
+        },
+        formatting = {
+            format = function(entry, vim_item)
+                vim_item.kind = ''
+                return vim_item
+            end
+        },
+    })
+
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' }
+        }, {
+            { name = 'cmdline', keyword_length = 2 }
+        }),
+        formatting = {
+            format = function(entry, vim_item)
+                vim_item.kind = ''
+                return vim_item
+            end
+        },
+        matching = { disallow_symbol_nonprefix_matching = false }
+    })
 
     -- require("luasnip/loaders/from_vscode").lazy_load()
 
+
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch',  { link = 'Variable' })
+    vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy',  { link = 'Comment' })
+    vim.api.nvim_set_hl(0, 'CmpItemKind',  { link = 'DullRed' })
+    vim.api.nvim_set_hl(0, 'CmpItemMenu',  { link = 'DullYellow' })
+
+
+    vim.api.nvim_set_hl(0, 'CmpItemKindText',  { link = '@string' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindMethod',  { link = '@function.method' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindFunction',  { link = '@function' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindConstructor',  { link = '@constructor' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindField',  { link = '@variable.member' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindVariable',  { link = '@variable' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindClass',  { link = '@type' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindInterface',  { link = '@lsp.type.interface' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindModule',  { link = '@module' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindProperty',  { link = '@property' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindUnit',  { link = '@special' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindValue',  { link = '@special' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindEnum',  { link = '@type' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindKeyword',  { link = '@keyword' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindConstant',  { link = '@constant' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindStruct',  { link = '@type' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindEvent',  { link = '@special' })
+    vim.api.nvim_set_hl(0, 'CmpItemKindOperator',  { link = '@operator' })
 
 end
 
@@ -154,7 +177,7 @@ return {
 
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        event = { 'InsertEnter', 'CmdlineEnter' },
         dependencies = {
             'onsails/lspkind.nvim',
             'hrsh7th/cmp-nvim-lsp',
