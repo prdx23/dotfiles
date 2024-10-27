@@ -43,11 +43,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-    desc = 'remove whitespace from end of lines',
-    group = vim.api.nvim_create_augroup('eol-whitespace-remove', { clear = true }),
-    command = [[%s/\s\+$//e]],
-})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--     desc = 'remove whitespace from end of lines',
+--     group = vim.api.nvim_create_augroup('eol-whitespace-remove', { clear = true }),
+--     command = [[%s/\s\+$//e]],
+-- })
 
 EOF
 
@@ -150,17 +150,17 @@ let g:netrw_fastbrowse=0
 
 " markdown fenced code syntax highlighting
 " let g:markdown_fenced_languages = [
-"     \'vim', 
-"     \'html', 
-"     \'python', 
-"     \'py=python', 
-"     \'sh', 
-"     \'shell=sh', 
-"     \'bash=sh', 
-"     \'css', 
-"     \'javascript', 
-"     \'js=javascript', 
-"     \'json=javascript', 
+"     \'vim',
+"     \'html',
+"     \'python',
+"     \'py=python',
+"     \'sh',
+"     \'shell=sh',
+"     \'bash=sh',
+"     \'css',
+"     \'javascript',
+"     \'js=javascript',
+"     \'json=javascript',
 "     \'cpp'
 "     \]
 

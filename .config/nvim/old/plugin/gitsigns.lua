@@ -10,7 +10,8 @@ require('gitsigns').setup {
     sign_priority = 6,
 }
 
-vim.cmd [[ command! GitBlame :Gitsigns toggle_current_line_blame ]]
+-- vim.cmd [[ command! GitBlame :Gitsigns toggle_current_line_blame ]]
+vim.cmd [[ command! GitBlame :Gitsigns blame_line ]]
 vim.cmd [[ command! GitReset :Gitsigns reset_hunk ]]
 vim.cmd [[ command! GitResetBuffer :Gitsigns reset_buffer ]]
 

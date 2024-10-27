@@ -98,11 +98,35 @@ local function lspconfig()
 
     local servers = {
 
-        -- rust_analyzer = {}, -- overridden by 'mrcjkb/rustaceanvim'
+        -- rust_analyzer = {
+            -- on_attach = function(client, bufnr)
+            --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            --     -- you can also put keymaps in here
+            -- end,
+            -- settings = {
+            --     ["rust-analyzer"] = {
+            --         imports = {
+            --             granularity = {
+            --                 group = "module",
+            --             },
+            --             prefix = "self",
+            --         },
+            --         cargo = {
+            --             buildScripts = {
+            --                 enable = true,
+            --             },
+            --         },
+            --         procMacro = {
+            --             enable = true
+            --         },
+            --     }
+            -- }
+        -- }, -- overridden by 'mrcjkb/rustaceanvim'
+        -- copy of this config exists below in rustaceanvim setup too
         -- remove from ensure_installed below if enabled here
         -- remove override from handler if enabled here
 
-        -- tsserver = {}, -- overridden by 'pmizio/typescript-tools.nvim',
+        -- ts_ls = {}, -- overridden by 'pmizio/typescript-tools.nvim',
         -- remove from ensure_installed below if enabled here
 
         pylsp = {},
@@ -132,13 +156,19 @@ local function lspconfig()
 
         clangd = {},
 
-        svelte = {},
+        -- svelte = {},
+
+        astro = {},
+
+        cssls = {},
 
         tailwindcss = {},
 
         -- unocss = {},
 
         jinja_lsp = {},
+
+        glsl_analyzer = {},
     }
 
 
@@ -151,7 +181,7 @@ local function lspconfig()
     require('mason-lspconfig').setup({
         ensure_installed = vim.tbl_keys(vim.tbl_deep_extend(
             'force', servers, {
-                tsserver = {},
+                ts_ls = {},
                 rust_analyzer = {},
             }
         )),
@@ -166,7 +196,7 @@ local function lspconfig()
 
                 -- NOTE!! - disable mason auto-config
                 -- cause overridden by 'pmizio/typescript-tools.nvim',
-                if server_name == 'tsserver' then
+                if server_name == 'ts_ls' then
                     return
                 end
 
@@ -185,7 +215,7 @@ local function lspconfig()
     --     server = {
     --         cmd = function()
     --             local mason_registry = require('mason-registry')
-    --             local ra_binary = mason_registry.is_installed('rust-analyzer') 
+    --             local ra_binary = mason_registry.is_installed('rust-analyzer')
     --             and mason_registry.get_package('rust-analyzer'):get_install_path() .. "/rust-analyzer"
     --             or "rust-analyzer"
     --             return { ra_binary }
@@ -233,9 +263,48 @@ return {
 
     {
         'mrcjkb/rustaceanvim',
-        version = '^4',
+        version = '^5',
         ft = { 'rust' },
-        dependencies = { 'neovim/nvim-lspconfig' }
+        dependencies = { 'neovim/nvim-lspconfig' },
+        config = function()
+            vim.g.rustaceanvim = {
+                tools = {
+                    -- Plugin configuration
+                },
+                server = {
+                    -- copy of this config exists above in rust_analyzer setup too
+                    on_attach = function(client, bufnr)
+                        -- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                        -- you can also put keymaps in here
+                    end,
+                    default_settings = {
+                        ['rust-analyzer'] = {
+                            -- imports = {
+                            --     granularity = {
+                            --         group = "module",
+                            --     },
+                            --     prefix = "self",
+                            -- },
+                            cargo = {
+                                buildScripts = {
+                                    enable = true,
+                                },
+                            },
+                            procMacro = {
+                                enable = true
+                            },
+                            completion = {
+                                callable = {
+                                    snippets = "none"
+                                }
+                            }
+                        },
+                    },
+                },
+                dap = {
+                },
+            }
+        end
     },
 
     {
@@ -246,7 +315,13 @@ return {
             'vue', 'astro', 'svelte',
         },
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        opts = {},
+        opts = {
+            -- filetypes = {
+            --     'javascript', 'javascriptreact', 'javascript.jsx',
+            --     'typescript', 'typescriptreact', 'typescript.tsx',
+            --     'vue', 'astro', 'svelte',
+            -- },
+        },
     },
 
     -- {
@@ -260,7 +335,7 @@ return {
 
     {
         "folke/trouble.nvim",
-        branch = "dev", -- IMPORTANT!
+        cmd = "Trouble",
         opts = {},
     }
 

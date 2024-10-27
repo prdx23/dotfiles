@@ -9,12 +9,6 @@ local function treesitter_config()
         auto_install = true,
         highlight = {
             enable = true,
-            -- disable = { 'toml' },
-            -- disable = { 'html', 'vue', 'css', 'scss' },
-            -- custom_captures = {
-            --     ["css.class"] = "Error",
-            --     ["css.tag"] = "Error", ["css.id"] = "Error",
-            -- },
             additional_vim_regex_highlighting = false,
             disable = function(lang, buf)
                 local max_filesize = 200 * 1024 -- 200 KB
@@ -27,18 +21,7 @@ local function treesitter_config()
 
     })
 
-    -- vim.api.nvim_set_hl(0, "@type.qualifier.rust", { link = "Keyword" })
-    -- vim.api.nvim_set_hl(0, "@storageclass.rust", { link = "Keyword" })
-    -- vim.api.nvim_set_hl(0, "@storageclass.lifetime.rust", { link = "Special" })
-
-    -- vim.api.nvim_set_hl(0, "@type.qualifier.glsl", { link = "Keyword" })
-    -- vim.api.nvim_set_hl(0, "@type.builtin.glsl", { link = "@function.builtin" })
-
     vim.api.nvim_set_hl(0, "@function.htmldjango", { link = "Special" })
-
-
-    -- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-    -- parser_config.javascript.used_by = "vue"
 
 
     -- add shader filetypes
