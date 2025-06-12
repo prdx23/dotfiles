@@ -39,7 +39,8 @@ set_winid() {
         --object-path /org/gnome/Shell/Extensions/Windows  \
         --method org.gnome.Shell.Extensions.Windows.List  \
         | cut -c 3- | rev | cut -c4- | rev  \
-        | jq -c '.[] | select(.wm_class == "Alacritty") | .id' \
+        | sed "s/'//g; s/\\\\\"/\\\"/g" \
+        | jq -r -c '.[] | select(.wm_class == "Alacritty") | .id' \
     )
 }
 
@@ -60,7 +61,8 @@ IS_VISIBLE=$( \
     --object-path /org/gnome/Shell/Extensions/Windows  \
     --method org.gnome.Shell.Extensions.Windows.List  \
     | cut -c 3- | rev | cut -c4- | rev  \
-    | jq -c '.[] | select(.wm_class == "Alacritty") | .focus' \
+    | sed "s/'//g; s/\\\\\"/\\\"/g" \
+    | jq -r -c '.[] | select(.wm_class == "Alacritty") | .focus' \
 )
 
 set_winid

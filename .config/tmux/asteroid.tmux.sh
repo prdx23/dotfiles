@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Colors
-bg='#141415'
+bg='#060608'
 fg='#c5c8c6'
 
-dark0='#1b1b1c'
+# dark0='#1b1b1c'
 dark1='#25262c'
 dark2='#2c2e34'
 light1='#33353f'
@@ -19,7 +19,7 @@ midfg=$fg
 
 red='#fc5d7c'
 orange='#f39660'
-yellow='#e7c664'
+yellow='#f0c674'
 green='#83d28d'
 blue='#7dc3bd'
 lightblue='#7eb2dd'
@@ -72,8 +72,8 @@ set -g status-right $right
 
 # Statusline: Left ------------------------------------------------------------
 ip="#(ip route get 1 | cut -d ' ' -f 7)"
-# uptime="#(bash ~/.config/tmux/uptime.sh)"
-uptime=""
+uptime="#(bash ~/.config/tmux/uptime.sh)"
+# uptime=""
 section="#[fg=$green,none]#[bg=$darkbg] $ip #[fg=$darkfg]| ﰵ $uptime"
 left="#[fg=$bg,bold]#[bg=$lightblue] #S $section#[fg=$light2,none]#[bg=$bg]  "
 set -g status-left-length 120

@@ -2,6 +2,7 @@
 untracked/
 dist/
 __live_server/
+__old/
 
 # DS_Store
 .DS_Store
@@ -155,3 +156,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# astro generated types
+.astro/

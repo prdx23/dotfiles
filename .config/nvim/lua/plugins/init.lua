@@ -16,6 +16,9 @@ return {
         priority = 1000,
         config = function ()
             vim.cmd.colorscheme("asteroid")
+            vim.api.nvim_set_hl(0, "@type.qualifier.glsl", { link = "Keyword" })
+            vim.api.nvim_set_hl(0, "@type.astro", { link = "Statement" })
+            vim.api.nvim_set_hl(0, "@lsp.type.type.astro", { link = "Statement" })
         end
     },
 

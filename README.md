@@ -29,7 +29,7 @@ This is mostly for my personal use but if you are following along this repo, thi
 ### Initial setup
 ```sh
 sudo dnf update
-sudo dnf install git curl gcc clang make entr ripgrep wl-clipboard fzf jq fd-find
+sudo dnf install git curl gcc clang make entr ripgrep wl-clipboard fzf jq fd-find bat
 git config --global user.email "..."
 git config --global user.name "Arsh"
 git config --global credential.helper store

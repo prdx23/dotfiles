@@ -21,6 +21,9 @@ return {
                 }
             },
             pickers = {
+                git_files = {
+                    file_ignore_patterns = { "^dist/" },
+                },
                 lsp_code_actions = {
                     layout_strategy = 'cursor',
                     layout_config = {

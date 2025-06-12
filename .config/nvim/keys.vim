@@ -75,8 +75,8 @@ nnoremap <leader>w :bw<cr>
 vnoremap <leader>w :bw<cr>
 
 " next and prev quickfix navigation
-autocmd FileType qf nnoremap <C-j> :cn<cr>
-autocmd FileType qf nnoremap <C-k> :cp<cr>
+" autocmd FileType qf nnoremap <leader>j :cn<cr>
+" autocmd FileType qf nnoremap <leader>k :cp<cr>
 
 " move highlighted block up and down
 vnoremap J :m '>+1<cr>gv=gv

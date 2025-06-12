@@ -75,8 +75,8 @@ antigen bundle git
 antigen bundle bgnotify
 
 antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting # should be last sourced
 # antigen bundle marlonrichert/zsh-autocomplete
 
 # antigen theme romkatv/powerlevel10k
@@ -130,16 +130,25 @@ eval "$(starship init zsh)"
 
 
 # Set up fzf key bindings and fuzzy completion
-# eval "$(fzf --zsh)"
-source /usr/share/fzf/shell/key-bindings.zsh
+eval "$(fzf --zsh)"
+# source /usr/share/fzf/shell/key-bindings.zsh
 export FZF_CTRL_R_OPTS="
   --reverse
   --height=30%
 "
 
 
+# bat configs
+export BAT_THEME="base16"
+
 
 
 # bun completions
 [ -s "/home/prdx/.bun/_bun" ] && source "/home/prdx/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
+
+export PATH=$PATH:/home/prdx/.spicetify
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

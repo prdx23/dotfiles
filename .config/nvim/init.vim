@@ -49,6 +49,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --     command = [[%s/\s\+$//e]],
 -- })
 
+require('diagnostic')
+
 EOF
 
 
@@ -79,7 +81,7 @@ autocmd InsertLeave * set nopaste
 
 
 set completeopt=menuone,noinsert,noselect
-set list listchars=trail:·,nbsp:·,tab:\ \
+set list listchars=trail:·,nbsp:·,tab:>··
 set inccommand=nosplit
 
 
@@ -130,6 +132,9 @@ set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
 set pumheight=10
 set pumwidth=15
 set pumblend=0
+
+" float window
+" set winborder=single
 
 
 " colorscheme
