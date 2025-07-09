@@ -19,6 +19,10 @@ return {
             vim.api.nvim_set_hl(0, "@type.qualifier.glsl", { link = "Keyword" })
             vim.api.nvim_set_hl(0, "@type.astro", { link = "Statement" })
             vim.api.nvim_set_hl(0, "@lsp.type.type.astro", { link = "Statement" })
+
+            vim.api.nvim_set_hl(0, "@lsp.type.type.svelte", { link = "Statement" })
+            -- vim.api.nvim_set_hl(0, "@lsp.mod.declaration.svelte", { link = "Type" })
+            vim.api.nvim_set_hl(0, "@lsp.typemod.type.declaration.svelte", { link = "Type" })
         end
     },
 

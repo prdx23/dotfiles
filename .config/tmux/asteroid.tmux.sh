@@ -74,8 +74,8 @@ set -g status-right $right
 ip="#(ip route get 1 | cut -d ' ' -f 7)"
 uptime="#(bash ~/.config/tmux/uptime.sh)"
 # uptime=""
-section="#[fg=$green,none]#[bg=$darkbg] $ip #[fg=$darkfg]| ﰵ $uptime"
-left="#[fg=$bg,bold]#[bg=$lightblue] #S $section#[fg=$light2,none]#[bg=$bg]  "
+section="#[fg=$green,none]#[bg=$darkbg] 󰢩 $ip #[fg=$darkfg]| 󰔚 $uptime"
+left="#[fg=$bg,bold]#[bg=$lightblue]   #S $section#[fg=$light2,none]#[bg=$bg]  "
 set -g status-left-length 120
 set -g status-left $left
 # -----------------------------------------------------------------------------

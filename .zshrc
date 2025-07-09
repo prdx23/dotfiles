@@ -103,11 +103,12 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 # To support 256 color schemes
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 
 # Path exports
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"/usr/local/go/bin"
+export PATH=$PATH:"$HOME/go/bin"
 # export PATH=$PATH:"$(yarn global bin)"
 export PATH=$PATH:"$HOME/.cargo/bin"
 export PATH=$PATH:"$HOME/.bun/bin"

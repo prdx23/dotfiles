@@ -140,11 +140,13 @@ local function get_diagnostics()
     local diagnostics = vim.diagnostic.get(0)
     if vim.tbl_isempty(diagnostics) then return '' end
 
+    local signs = vim.diagnostic.config().signs.text
+
     local severities = {
-        [ vim.diagnostic.severity.ERROR ] = { 0, '%#StatusLineMidRed#  ' },
-        [ vim.diagnostic.severity.WARN  ] = { 0, '%#StatusLineMidOrange#  ' },
-        [ vim.diagnostic.severity.INFO  ] = { 0, '%#StatusLineMidBlue#  ' },
-        [ vim.diagnostic.severity.HINT  ] = { 0, '%#StatusLineMidPurple#  ' },
+        [ vim.diagnostic.severity.ERROR ] = { 0, table.concat({ '%#StatusLineMidRed# ', signs[vim.diagnostic.severity.ERROR], ' ' }) },
+        [ vim.diagnostic.severity.WARN  ] = { 0, table.concat({ '%#StatusLineMidOrange# ', signs[vim.diagnostic.severity.WARN], ' ' }) },
+        [ vim.diagnostic.severity.INFO  ] = { 0, table.concat({ '%#StatusLineMidBlue# ', signs[vim.diagnostic.severity.INFO], ' ' }) },
+        [ vim.diagnostic.severity.HINT  ] = { 0, table.concat({ '%#StatusLineMidPurple# ', signs[vim.diagnostic.severity.HINT], ' ' }) },
     }
 
     for _, v in ipairs(diagnostics) do
@@ -238,7 +240,7 @@ local function get_bufferlist()
         if section.i == 1 then
             table.insert(output, ' ')
         else
-            table.insert(output, '⎸')
+            table.insert(output, '|')
         end
         table.insert(output, section.icon)
         if vim.g.tabline_show_bufnums then
@@ -249,7 +251,7 @@ local function get_bufferlist()
         table.insert(output, ' %*')
     end
 
-    table.insert(output, '⎸')
+    table.insert(output, '|')
     return table.concat(output)
 end
 
@@ -364,7 +366,7 @@ function Tabline()
     local gitstatus = get_gitstatus()
 
     if diagnostics ~= '' and gitstatus ~= '' then
-        gitstatus = '%#StatusLineMid#⎸%*' .. gitstatus
+        gitstatus = '%#StatusLineMid#|%*' .. gitstatus
     end
 
     return table.concat({

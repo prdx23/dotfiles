@@ -49,6 +49,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --     command = [[%s/\s\+$//e]],
 -- })
 
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Set listchars for Go files",
+    group = vim.api.nvim_create_augroup('filetype-go', { clear = true }),
+    pattern = "go",
+    callback = function()
+        vim.opt_local.listchars = { trail = "·", nbsp = "·", tab = "  " }
+    end,
+})
+
+
 require('diagnostic')
 
 EOF

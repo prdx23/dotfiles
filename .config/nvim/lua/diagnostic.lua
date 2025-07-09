@@ -22,12 +22,17 @@ vim.diagnostic.config({
         severity = { min = vim.diagnostic.severity.HINT },
         -- priority = 10,
 
-        --     ﱣ  ﱤ ┆·               諸 
+        --     ﱣ  ﱤ ┆·               諸  󰗀 
+        --   󰝤          󰆢  󰨓  󰝣  󱓻    󰨕  󱓼  󰄮  󰡖  󰄱
+        --                 
+        --       󱈸  󰈅       󰔶  󰔷  
+        --     󰙎  󰋽    󰋼  󰰄  󰰅  󰬐  󰰃 
+        --     󰌵    󰛨  󰌶  󱠂  󱠃
         text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN]  = '',
-            [vim.diagnostic.severity.INFO]  = '',
-            [vim.diagnostic.severity.HINT]  = '',
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN]  = '',
+            [vim.diagnostic.severity.INFO]  = '',
+            [vim.diagnostic.severity.HINT]  = '',
         },
         numhl = {
             [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
