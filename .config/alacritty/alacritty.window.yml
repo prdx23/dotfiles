@@ -1,0 +1,120 @@
+
+window:
+  # opacity: 0.95
+  # decorations: none
+  # startup_mode: Fullscreen
+  # title: Alacritty
+  # dynamic_title: false
+
+font:
+  size: 10.0
+
+  normal:
+    # family: Iosevka-glitchcomet
+    # family: MesloLGS Nerd Font
+    # family: Inconsolata Nerd Font Propo
+   family: DejaVuSansMono Nerd Font
+   # style: Regular
+
+  # bold:
+  #   family: MesloLGSDZ Nerd Font
+    # style: Bold
+
+  #italic:
+    # family: DejaVuSansMono Nerd Font Mono
+    # style: Oblique
+
+  #bold_italic:
+    # family: DejaVuSansMono Nerd Font Mono
+    # style: Bold Oblique
+
+  #normal:
+  #  family: DejaVuSansMono Nerd Font
+  #  # style: Regular
+
+  ##bold:
+  #  # family: DejaVuSansMono Nerd Font Mono
+  #  # style: Bold
+
+  ##italic:
+  #  # family: DejaVuSansMono Nerd Font Mono
+  #  # style: Oblique
+
+  ##bold_italic:
+  #  # family: DejaVuSansMono Nerd Font Mono
+  #  # style: Bold Oblique
+
+colors:
+  primary:
+   # background: '#1d1f21'
+   background: '#141415'
+   # foreground: '#c5c8c6'
+
+  # Normal colors
+  normal:
+   # black:   '#1d1f21'
+   # black:   '#181819'
+   red:     '#fc5d7c'
+   # green:   '#bff074'
+   green:   '#83d28d'
+   # yellow: '#e7c664'
+   yellow:  '#f0c674'
+   blue:    '#74a2cb'
+   # blue:    '#7eb2dd'
+   magenta:  '#f39660'
+   cyan:    '#70d8cb'
+   white:   '#c5c8c6'
+
+
+  #  black:   '#1d1f21'
+  #  red:     '#cc6666'
+  #  green:   '#b5bd68'
+  #  yellow:  '#f0c674'
+  #  blue:    '#81a2be'
+  #  magenta: '#b294bb'
+  #  cyan:    '#8abeb7'
+  #  white:   '#c5c8c6'
+
+  # Bright colors
+  #bright:
+  #  black:   '#666666'
+  #  red:     '#d54e53'
+  #  green:   '#b9ca4a'
+  #  yellow:  '#e7c547'
+  #  blue:    '#7aa6da'
+  #  magenta: '#c397d8'
+  #  cyan:    '#70c0b1'
+  #  white:   '#eaeaea'
+
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  #dim:
+  #  black:   '#131415'
+  #  red:     '#864343'
+  #  green:   '#777c44'
+  #  yellow:  '#9e824c'
+  #  blue:    '#556a7d'
+  #  magenta: '#75617b'
+  #  cyan:    '#5b7d78'
+  #  white:   '#828482'
+
+
+cursor:
+  style:
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Underline
+
+  unfocused_hollow: true
+
+  # Thickness of the cursor relative to the cell width as floating point number
+  # from `0.0` to `1.0`.
+  thickness: 0.20
+
+key_bindings:
+  - { key: Return,   mods: Alt,           action: ToggleFullscreen }
+

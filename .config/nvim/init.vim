@@ -59,7 +59,17 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Set opts for gdscript files",
+    group = vim.api.nvim_create_augroup('filetype-gdscript', { clear = true }),
+    pattern = "gdscript",
+    callback = function()
+        vim.opt_local.expandtab = true
+    end,
+})
+
 require('diagnostic')
+require('neovide-config')
 
 EOF
 

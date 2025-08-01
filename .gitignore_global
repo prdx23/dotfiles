@@ -4,8 +4,16 @@ dist/
 __live_server/
 __old/
 
-# DS_Store
+# OS
 .DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -27,8 +35,8 @@ develop-eggs/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+# lib/
+# lib64/
 parts/
 sdist/
 var/
@@ -159,3 +167,16 @@ dist-ssr
 
 # astro generated types
 .astro/
+
+# svelte stuff
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+

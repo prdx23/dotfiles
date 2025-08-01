@@ -1,0 +1,12 @@
+[Unit]
+Description=Backup Zen session
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=sh /home/prdx/.config/zsh/zen_session_backup.sh
+StandardOutput=append:/home/prdx/logs/zen-backup.log
+StandardError=append:/home/prdx/logs/zen-backup-error.log
+
+[Install]
+WantedBy=default.target

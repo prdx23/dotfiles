@@ -1,0 +1,45 @@
+[colors.normal]
+blue = "#74a2cb"
+cyan = "#70d8cb"
+green = "#83d28d"
+magenta = "#f39660"
+red = "#fc5d7c"
+white = "#c5c8c6"
+yellow = "#f0c674"
+
+[colors.primary]
+# background = "#111112"
+background = "#060608"
+
+[cursor]
+thickness = 0.2
+unfocused_hollow = true
+
+[cursor.style]
+shape = "Underline"
+
+[font]
+size = 10.0
+
+[font.normal]
+# family = "DejaVuSansMono Nerd Font"
+# family = "0xProto Nerd Font Mono"
+# family = "iMWritingMono Nerd Font Mono"
+# family = "BlexMono Nerd Font Mono"
+family = "JetBrainsMono NF"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "Return"
+mods = "Alt"
+
+[window]
+decorations = "none"
+dynamic_title = false
+# startup_mode = "Maximized"
+startup_mode = "Fullscreen"
+title = "Alacritty"
+opacity = 1.0
+
+[selection]
+save_to_clipboard = true

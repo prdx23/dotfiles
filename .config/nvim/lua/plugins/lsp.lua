@@ -32,6 +32,13 @@ return {
 
             require("mason").setup()
 
+            vim.lsp.config('ts_ls', {
+                filetypes = {
+                    'javascript', 'javascriptreact', 'javascript.jsx',
+                    'typescript', 'typescriptreact', 'typescript.tsx',
+                    'vue', 'astro', 'svelte',
+                },
+            })
 
             vim.lsp.config('lua_ls', {
                 settings = {
@@ -45,27 +52,29 @@ return {
             })
 
             vim.lsp.config('rust_analyzer', {
-                -- imports = {
-                --     granularity = {
-                --         group = "module",
-                --     },
-                --     prefix = "self",
-                -- },
-                -- diagnostic = {
-                --     -- TEMP: until https://github.com/neovim/neovim/issues/30985
-                --     refreshSupport = false,
-                -- },
-                cargo = {
-                    buildScripts = {
-                        enable = true,
+                settings = {
+                    -- imports = {
+                    --     granularity = {
+                    --         group = "module",
+                    --     },
+                    --     prefix = "self",
+                    -- },
+                    -- diagnostic = {
+                    --     -- TEMP: until https://github.com/neovim/neovim/issues/30985
+                    --     refreshSupport = false,
+                    -- },
+                    cargo = {
+                        buildScripts = {
+                            enable = true,
+                        },
                     },
-                },
-                procMacro = {
-                    enable = true
-                },
-                completion = {
-                    callable = {
-                        snippets = "none"
+                    procMacro = {
+                        enable = true
+                    },
+                    completion = {
+                        callable = {
+                            snippets = "none"
+                        }
                     }
                 }
             })
@@ -90,11 +99,24 @@ return {
                 filetypes = { "css", "sass", "scss", "less", "astro" },
             })
 
+            vim.lsp.config('svelte', {
+                settings = {
+                    -- -- configuration = {
+                    -- svelte = {
+                    --     plugin = {
+                    --         typescript = {
+                    --             semanticTokens = { enable = false },
+                    --         }
+                    --     }
+                    -- }
+                    -- -- }
+                }
+            })
 
 
             vim.lsp.enable({
                 'lua_ls',
-                -- 'ts_ls',
+                'ts_ls',
                 'rust_analyzer',
                 'pylsp',
                 'gopls',
@@ -108,6 +130,7 @@ return {
                 'eslint',
                 -- 'mdx_analyzer',
                 'cssls',
+                'gdscript',
             })
 
             -- TODO: temp fix until telescope uses winborder
@@ -120,22 +143,24 @@ return {
     },
 
 
-    {
-        "pmizio/typescript-tools.nvim",
-        ft = {
-            'javascript', 'javascriptreact', 'javascript.jsx',
-            'typescript', 'typescriptreact', 'typescript.tsx',
-            'vue', 'astro', 'svelte',
-        },
-        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        opts = {
-            filetypes = {
-                'javascript', 'javascriptreact', 'javascript.jsx',
-                'typescript', 'typescriptreact', 'typescript.tsx',
-                'vue', 'astro', 'svelte',
-            },
-        },
-    },
+    -- {
+    --     "pmizio/typescript-tools.nvim",
+    --     ft = {
+    --         'javascript', 'javascriptreact', 'javascript.jsx',
+    --         'typescript', 'typescriptreact', 'typescript.tsx',
+    --         'vue', 'astro',
+    --         'svelte',
+    --     },
+    --     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    --     opts = {
+    --         filetypes = {
+    --             'javascript', 'javascriptreact', 'javascript.jsx',
+    --             'typescript', 'typescriptreact', 'typescript.tsx',
+    --             'vue', 'astro',
+    --             'svelte',
+    --         },
+    --     },
+    -- },
 
     -- {
     --     'mrcjkb/rustaceanvim',
