@@ -41,10 +41,18 @@ git config --global core.excludesfile '~/.gitignore_global'
 git config --global core.editor nvim
 git config --global init.defaultBranch main
 
+# python
 sudo dnf install python3-pip
+
+# rust https://www.rust-lang.org/learn/get-started
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-sudo dnf install npm
+
+# go https://go.dev/doc/install
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf <go tar file>
+
+# npm + nvm https://github.com/nvm-sh/nvm
+sudo dnf install npm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 ```
 
 
@@ -53,6 +61,7 @@ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf <go tar file>
 sudo dnf install alacritty xrandr wmctrl
 # copy .config/alacritty/
 # set keyboard shortcut for alacritty_popup_wayland.sh/alacritty_popup_xorg.sh
+# install gnome extension - https://github.com/ickyicky/window-calls
 ```
 
 
@@ -62,7 +71,10 @@ sudo dnf install zsh
 chsh -s $(which zsh)
 # logout and login
 # copy .zshrc and .config/zsh
-curl -L git.io/antigen > ~/.config/zsh/antigen.zsh
+
+# zinit plugin manager https://github.com/zdharma-continuum/zinit
+bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+
 curl -sS https://starship.rs/install.sh | sh
 ```
 
@@ -83,6 +95,7 @@ sudo make install
 
 # copy .config/nvim
 # open nvim and lazy.nvim should install all plugins
+# use :Lazy and :Mason to update/install the rest
 
 # install nvim server
 python3 -m pip install --user pipx

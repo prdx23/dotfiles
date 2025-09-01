@@ -70,11 +70,12 @@ vim.api.nvim_create_autocmd("FileType", {
 
 require('diagnostic')
 require('neovide-config')
+require('terminal')
+require('statusline')
 
 EOF
 
 
-lua require('statusline')
 
 
 filetype plugin indent on
